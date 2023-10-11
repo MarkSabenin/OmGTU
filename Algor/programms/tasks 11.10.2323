@@ -10,10 +10,6 @@ amax = a.Max();}
 for (int i=0; i<n; i++){
 if (amin == a[i]) nmin=i;
 if (amax == a[i]) nmax=i;}
-Console.WriteLine(amin);
-Console.WriteLine(amax);
-Console.WriteLine(nmin);
-Console.WriteLine(nmax);
 int b=Math.Abs(nmax-nmin);
 if (b==0) Console.WriteLine("Все числа равны/Всего одно число; Переделывай");
 if (b==1) Console.WriteLine("Элементов нет");
@@ -107,8 +103,19 @@ Console.WriteLine(m);
 
 
 
-
-
-
-
-
+----задача 5----
+ int n = Convert.ToInt32(Console.ReadLine());
+ int[] a = new int[n];
+ int a1 = 0, a2 = 0;
+ bool k = false;
+ for (int i = 0; i < n; i++)
+ {
+     a[i] = Convert.ToInt32(Console.ReadLine());
+     if (a[i] < 0)
+     {
+         a2 = a[i] / 10;
+         a1 = a[i] - a2 * 10;
+         if (a1 == -3) k = true;
+     }
+ }
+ Console.WriteLine(k);
