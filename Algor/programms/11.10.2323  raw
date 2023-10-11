@@ -1,3 +1,4 @@
+----задача 1----
 int n=Convert.ToInt32(Console.ReadLine());
 int amin=0, amax=0, nmin=0, nmax=0;
 int c=0;
@@ -30,7 +31,7 @@ Console.WriteLine(c);
 
 
 
-
+----задача 2----
 int n = Convert.ToInt32(Console.ReadLine());
 int[] a = new int[n];
 int a1 = 0, a2 = 0;
@@ -57,6 +58,37 @@ for (int i = 0; i < n; i++)
     }
 }
  Console.WriteLine(d);
+
+
+----задача 3----
+int n = Convert.ToInt32(Console.ReadLine());
+int[] a = new int[n];
+int a1 = 0, a2 = 0, a3=0;
+for (int i = 0; i < n; i++)
+{
+    a[i] = Convert.ToInt32(Console.ReadLine());
+    if (a[i] % 2 != 0)
+    {
+        if (a[i] - 9 < 0) Console.WriteLine(a[i]);
+        else
+        {
+            do
+            {
+                a2 = a[i] / 10;
+                a1 = a[i] - a2 * 10;
+                a3 = a3 + a1;
+                a[i] = a[i] / 10;
+
+            }
+            while (a[i] > 0);
+            Console.WriteLine(a3);
+            a3 = 0;
+        }
+        
+    }
+}
+
+
 
 
 
