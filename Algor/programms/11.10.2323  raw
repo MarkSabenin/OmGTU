@@ -1,0 +1,68 @@
+// using System;
+// using System.Linq;
+// class HelloWorld {
+//   static void Main() {
+//       int n=Convert.ToInt32(Console.ReadLine());
+//       int amin=0, amax=0, nmin=0, nmax=0;
+//       int c=0;
+//       int []a =new int [n];
+//       for (int i=0; i<n; i++) {
+//       a[i]=Convert.ToInt32(Console.ReadLine());
+//       amin = a.Min();
+//       amax = a.Max();}
+//       for (int i=0; i<n; i++){
+//       if (amin == a[i]) nmin=i;
+//       if (amax == a[i]) nmax=i;}
+//       Console.WriteLine(amin);
+//       Console.WriteLine(amax);
+//       Console.WriteLine(nmin);
+//       Console.WriteLine(nmax);
+//       int b=Math.Abs(nmax-nmin);
+//       if (b==0) Console.WriteLine("Все числа равны/Всего одно число; Переделывай");
+//       if (b==1) Console.WriteLine("Элементов нет");
+//       if (b>1) {
+//           if (nmin<nmax){
+//           for (int j=nmin+1; j<nmax; j++)
+//           if (a[j]%2==0) c++;
+//           }
+//           if (nmin>nmax){
+//           for (int j=nmax+1; j<nmin; j++)
+//           if (a[j]%2==0) c++;
+//           }
+//           }
+//       Console.WriteLine(c);
+//       }
+      
+//   }
+
+
+
+
+using System;
+using System.Linq;
+class HelloWorld {
+  static void Main() {
+     int n=Convert.ToInt32(Console.ReadLine());
+      int []a =new int [n];
+      int a1=0, a2=0;
+      int c=0;
+      bool d=true;
+      for (int i=0; i<n; i++) {
+      a[i]=Convert.ToInt32(Console.ReadLine());
+      if (i+1%2==0)
+      {
+      if (a[i]-9<0) {if (a[i]==5) Console.WriteLine(d); else {d = false; Console.WriteLine(d);}}
+      else
+      while (a[i]-9>0)
+      {
+      a2=a[i]/10;
+      a1=a[i]-a2*10;
+      if (a1!=5) d=false;
+      a[i]=a[i]/10;
+      }
+      Console.WriteLine(d);
+      }
+      
+  }
+}
+}
