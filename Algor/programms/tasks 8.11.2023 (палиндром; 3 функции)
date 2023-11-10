@@ -1,0 +1,103 @@
+1) На вход подается строка, необходимо найти сумму четных цифр в строке и определить, является ли строка палиндромом
+
+
+static void Main()
+{
+    int b = 0;
+    bool ip = false;
+    string a = Convert.ToString(Console.ReadLine());
+    b = SummaCetnyx(a);
+        a = a.Replace(" ", "");
+        a = a.ToLower();
+        string ar = Reverse(a);
+        if (ar == a) ip = true;
+    Console.WriteLine("Сумма четных равна {0}", b);
+    if (ip)
+        Console.WriteLine("Строка палиндром");
+    else Console.WriteLine("Строка не палиндром");
+}
+
+
+public static string Reverse(string s)
+{
+    char[] charArray = s.ToCharArray();
+    Array.Reverse(charArray);
+    return new string(charArray);
+}
+
+
+public static int SummaCetnyx(string s, int b=0)
+{
+    char[] charArray = s.ToCharArray();
+    
+    foreach (char c in charArray)
+        if (Char.IsDigit(c) && c % 2 == 0)
+        {
+            int cc = (int)Char.GetNumericValue(c);
+            b += cc;
+        }
+    return b;
+}
+
+
+2) В массиве размерностью n на m определить количество строк в которых минимальный и максимальный элементы четные
+
+
+public static int[,] Fillme(int[,] a)
+{
+        int n = a.GetLength(0);
+        int m = a.GetLength(1);
+    for (int i = 0; i<n; i++)
+        for (int j = 0; j<m; j++)
+            a[i, j] = Convert.ToInt32(Console.ReadLine());
+            return a;
+}
+public static int[] Minme(int[,] a)
+{
+            int n = a.GetLength(0);
+            int m = a.GetLength(1);
+            int[] mi = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                int amin = 0;
+                for (int j = 0; j < n; j++)
+                {
+                    if (j == 0) amin = a[i, j];
+                    else if (a[i, j] < a[i, j - 1]) amin = a[i, j];
+                }
+                mi[i] = amin;
+            }
+            return mi;
+}
+public static int[] Maxme(int[,] a)
+{
+            int n = a.GetLength(0);
+            int m = a.GetLength(1);
+            int[] ma = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                int amax = 0;
+                for (int j = 0; j < n; j++)
+                {
+                    if (j == 0) amax = a[i, j];
+                    else if (a[i, j] > a[i, j - 1]) amax = a[i, j];
+                }
+                ma[i] = amax;
+            }
+            return ma;
+}
+static void Main()
+{
+            int r = 0;
+            int n = Convert.ToInt32(Console.ReadLine());
+        int m = Convert.ToInt32(Console.ReadLine());
+        int[,] ae = new int[n,m];
+            int[,] a = Fillme(ae);
+            int[] mi = Minme(a);
+            int[] ma = Maxme(a);
+            for (int i = 0;i < n;i++)
+            {
+                if (mi[i] % 2 == 0 && ma[i] % 2 == 0) r++;
+            }
+            Console.WriteLine("Строк, в которых максимальный и минимальный эдемент чётные: {0}", r);
+}
