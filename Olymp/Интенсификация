@@ -1,0 +1,40 @@
+static void Main()
+{
+    string d1 = Convert.ToString(Console.ReadLine());
+    var dind1 = Daysindate(d1);
+    string d2 = Convert.ToString(Console.ReadLine());
+    var dind2 = Daysindate(d2);
+    int p = Convert.ToInt32(Console.ReadLine());
+    int pp = 0;
+    int s = dind2 - dind1 + 1;
+    for (int i = 0; i < s; i++)
+    {
+        if (i == 0) { pp = p; p++; }
+        if (i != 0) { pp = pp + p; p++; }
+    }
+    Console.WriteLine(pp);
+}
+public static int Daysindate(string s)
+{
+    char[] cd = s.ToCharArray();
+    int ds = (int)Char.GetNumericValue(cd[0]) * 10 + (int)Char.GetNumericValue(cd[1]);
+    int ms = (int)Char.GetNumericValue(cd[3]) * 10 + (int)Char.GetNumericValue(cd[4]);
+    int ys = (int)Char.GetNumericValue(cd[6]) * 1000 + (int)Char.GetNumericValue(cd[7]) * 100 + (int)Char.GetNumericValue(cd[8]) * 10 + (int)Char.GetNumericValue(cd[9]);
+    int diny = (ys % 4) * 365 + ((ys - (ys % 4))*366 + (ys - (ys % 4))*3*365)/4;
+    int dinm = 0;
+    if (ms == 1) dinm = 0;
+    if (ms == 2) dinm = 31;
+    if (ms == 3) dinm = 59;
+    if (ms == 4) dinm = 90;
+    if (ms == 5) dinm = 120;
+    if (ms == 6) dinm = 151;
+    if (ms == 7) dinm = 181;
+    if (ms == 8) dinm = 212;
+    if (ms == 9) dinm = 243;
+    if (ms == 10) dinm = 273;
+    if (ms == 11) dinm = 304;
+    if (ms == 12) dinm = 334;
+    if (ys % 4 == 0 && ms > 2) dinm++; 
+    int dind = ds + diny + dinm;
+    return dind;
+}
