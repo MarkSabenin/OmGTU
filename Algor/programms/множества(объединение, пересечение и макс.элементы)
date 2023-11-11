@@ -1,0 +1,48 @@
+        int n = Convert.ToInt32(Console.ReadLine());
+        int b = 10;
+        int[][]a = new int[n][];
+        int[] ain = Array.Empty<int>();
+        int[] aun = Array.Empty<int>();
+        int[] amax = new int[n];
+        IEnumerable<int> aiin = Array.Empty<int>();
+        IEnumerable<int> auun = Array.Empty<int>();
+        for (int i = 0; i < n; i++)
+        {
+            int k = Convert.ToInt32(Console.ReadLine());
+            a[i] = new int[k];
+            for (int j = 0; j < k; j++) a[i][j] = Convert.ToInt32(Console.ReadLine());
+        }
+        for(int i = 0; i < n; i++)
+            {
+            if (i == 0) ain = a[i];
+            else if (i == 1)
+            {
+                aiin = ain.Intersect(a[i]);
+            }
+            else
+            {
+                aiin = aiin.Intersect(a[i]);
+            }
+        }
+        for (int i = 0; i < n; i++)
+        {
+            if (i == 0) aun = a[i];
+            else if (i == 1)
+            {
+                auun = aun.Union(a[i]);
+            }
+            else
+            {
+                auun = auun.Union(a[i]);
+            }
+        }
+        for (int i = 0; i < n; i++)
+        {
+            amax[i] = a[i].Max();
+        }
+        string ains = String.Join(", ", aiin);
+        Console.WriteLine("Элементы пересечения множеств: {0}", ains);
+        string auns = String.Join(", ", auun);
+        Console.WriteLine("Элементы объединения множеств: {0}", auns);
+        string amaxs = String.Join(", ", amax);
+        Console.WriteLine("Максимальные элементы множеств: {0}", amaxs);
