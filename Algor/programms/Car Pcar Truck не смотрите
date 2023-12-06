@@ -57,19 +57,19 @@ namespace ConsoleApplication18
         set {power = value;} }
     public void Print1()
         {
-            Console.WriteLine("Номер авто : {0}", Number);
-            Console.WriteLine("Автомобиль марки : {0}", Name);
-            Console.WriteLine("Год выпуска : {0}", Year);
-            Console.WriteLine("Последний техосмотр : {0}", TehOsmotrYears[TehOsmotrYears.Length-1]);
+            Console.WriteLine("Номер авто : {0}", this.Number);
+            Console.WriteLine("Автомобиль марки : {0}", this.Name);
+            Console.WriteLine("Год выпуска : {0}", this.Year);
+            Console.WriteLine("Последний техосмотр : {0}", this.TehOsmotrYears[TehOsmotrYears.Length-1]);
             Console.WriteLine("Тип кузова : {0}", this.type);
             Console.WriteLine("Мощность двигателя : {0}", this.power);
         }
-        public bool PassOfType(string i)
+        public bool PCOfType(string i)
     {
         if (this.type == i) { Print1(); return true; }
         return false;
     }
-        
+
 }
     class Truck: Car 
 {
@@ -80,15 +80,22 @@ namespace ConsoleApplication18
     }
     public int Tonnage
     { get {return tonnage;}
-        set {tonnage = value;} }
-
-        public int BesrWayTransport(Truck[])
+        set {tonnage = value;} } 
+        public void Print2()
         {
-
+            Console.WriteLine("Номер авто : {0}", this.Number);
+            Console.WriteLine("Автомобиль марки : {0}", this.Name);
+            Console.WriteLine("Год выпуска : {0}", this.Year);
+            Console.WriteLine("Последний техосмотр : {0}", 
+            this.TehOsmotrYears[TehOsmotrYears.Length-1]);
+            Console.WriteLine("Грузоподъёмность : {0}", this.tonnage);
         }
 }
 
-    
+    static void Main()
+    {
+        
+    }
     
     
 }
