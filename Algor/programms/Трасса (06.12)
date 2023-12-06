@@ -1,0 +1,17 @@
+int n = Convert.ToInt32(Console.ReadLine());
+      int t = Convert.ToInt32(Console.ReadLine());
+      int a=0, b=0, u=0, d=0;
+      for (int i = 0; i < n; i++)
+      {
+          a = Convert.ToInt32(Console.ReadLine());
+          b = Convert.ToInt32(Console.ReadLine());
+          if (i == 0) { u = a; d = t + b;}
+          else if (i>0)
+          {
+              if (u+t<d) d = u + t + b;
+              else d = d+b;
+              u = u + a;
+          }
+      }
+      int s = Math.Min(u+t, d);
+    Console.WriteLine(s);
