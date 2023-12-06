@@ -1,0 +1,153 @@
+class Car
+{
+    string num = "abc";
+    string name = "Unnamed";
+    int year = 2000;
+    int[] toy;
+    public Car(string num, string name, int year,
+        int[] toy)
+    {
+        this.num = num;
+        this.name = name;
+        this.year = year;
+        this.toy = toy;
+    }
+    public string Number
+    {
+        get { return num; }
+        set { num = value; }
+    }
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
+    }
+    public int Year
+    {
+        get { return year; }
+        set { year = value; }
+    }
+    public int[] TehOsmotrYears
+    {
+        get { return toy; }
+        set { toy = value; }
+    }
+    public void PrintFail() { Console.WriteLine("Не удолось выполнить"); }
+}
+
+class PassangerCar : Car
+{
+    string type = "none";
+    int power = 100;
+    public PassangerCar(string num, string name, int year, int[] toy, string type, int power) : base(num, name, year, toy)
+    {
+        this.type = type;
+        this.power = power;
+    }
+    public string Type
+    {
+        get { return type; }
+        set { type = value; }
+    }
+    public int Power
+    {
+        get { return power; }
+        set { power = value; }
+    }
+    public void Print1()
+    {
+        Console.WriteLine("Номер авто : {0}", this.Number);
+        Console.WriteLine("Автомобиль марки : {0}", this.Name);
+        Console.WriteLine("Год выпуска : {0}", this.Year);
+        Console.WriteLine("Последний техосмотр : {0}", this.TehOsmotrYears[TehOsmotrYears.Length - 1]);
+        Console.WriteLine("Тип кузова : {0}", this.type);
+        Console.WriteLine("Мощность двигателя : {0}", this.power);
+    }
+    public bool PCOfType(string i)
+    {
+        if (this.type == i) { Print1();  return true; }
+        return false;
+    }
+
+}
+class Truck : Car
+{
+    int tonnage = 100;
+    public Truck(string num, string name, int year, int[] toy, int tonnage) : base(num, name, year, toy)
+    {
+        this.tonnage = tonnage;
+    }
+    public int Tonnage
+    {
+        get { return tonnage; }
+        set { tonnage = value; }
+    }
+    public void Print2()
+    {
+        Console.WriteLine("Номер авто : {0}", this.Number);
+        Console.WriteLine("Автомобиль марки : {0}", this.Name);
+        Console.WriteLine("Год выпуска : {0}", this.Year);
+        Console.WriteLine("Последний техосмотр : {0}",
+        this.TehOsmotrYears[TehOsmotrYears.Length - 1]);
+        Console.WriteLine("Грузоподъёмность : {0}", this.tonnage);
+    }
+}
+
+static void Main()
+{
+    PassangerCar[] pcm = new PassangerCar[4];
+    pcm[0] = new PassangerCar("giga", "Lada Priora", 2000, new int[]{ 2012, 2020}, "универсал", 200);
+    pcm[1] = new PassangerCar("allo", "Ford", 1990, new int[] {2000, 2012, 2040}, "универсал", 300);
+    pcm[2] = new PassangerCar("haha", "WorldIsMine", 2945, new int[] { 0 }, "хетчбек", 1000);
+    pcm[3] = new PassangerCar("fndd", "Maik", 2000, new int[] { 2000, 2023 }, "без кузова 0_0", 300);
+    Truck[] tm = new Truck[5];
+    tm[0] = new Truck("bigb", "БелАЗ", 2003, new int[] { 2004, 2006, 2008, 2010, 2100}, 50000);
+    tm[1] = new Truck("lilc", "КамАЗ", 2001, new int[] { 2004, 2010 }, 60000);
+    tm[2] = new Truck("georgy", "Георгий", 2003, new int[] { 2035, 2067 }, 60000);
+    tm[3] = new Truck("abot", "Оптимус Прайм", -15500, new int[] { 0 }, 99999);
+
+    Console.WriteLine("Введите тип кузова");
+    string k = Console.ReadLine();
+    for (int i = 0; i < 4; i++)
+    {
+        pcm[i].PCOfType(k);
+        if (!pcm[i].PCOfType(k)) { Console.WriteLine("Таких нет, пока"); Console.WriteLine(); break; }
+            Console.WriteLine();
+    }
+
+    Console.WriteLine("Введите величину массы, которую необходимо перевезти");
+    int t = Convert.ToInt32(Console.ReadLine());
+    int c = 0;
+    bool f = false;
+    for (int i = 0;i < tm.Length-1; i++)
+    {
+        if (tm[i].Tonnage >= t) { c = 1; f = true; Console.WriteLine("Необходим 1 грузовик (слишком просто)"); Console.WriteLine(); break; }
+    }
+    if (!f)
+    {
+        bool ff = false;
+        int[] b = new int[4];
+        for (int i = 0;i<4;i++) b[i] = tm[i].Tonnage;
+        Array.Sort(b);
+        int a = 0;
+        c = 1;
+        for (int i = 0;i<3;i++)
+        {
+            a = a + b[i]; c++; if (a + b[b.Length - 1] > t) { ff = true; Console.WriteLine("Необходимо {0} грузовика", c); Console.WriteLine(); break; }
+        }
+        if (!ff) Console.WriteLine("Грузовички слабы...");
+    }
+
+    Console.WriteLine("Введите номер авто");
+    string n = Console.ReadLine();
+    bool f1 = false;
+    for (int i = 0; i < 4;  i++)
+    {
+        if (n == pcm[i].Number) { Console.WriteLine("Это легковая машина {0}", pcm[i].Name); f1 = true; break; }
+    }
+    if (!f1) for (int i = 0; i < 4; i++)
+        {
+            if (n == tm[i].Number) { Console.WriteLine("Это грузовик {0}", tm[i].Name); f1 = true; break; };
+        }
+    if (!f1) Console.WriteLine("Нет такого номера, пока");
+}
