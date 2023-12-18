@@ -1,0 +1,70 @@
+int X = Convert.ToInt32(Console.ReadLine());
+int Y = Convert.ToInt32(Console.ReadLine());
+int L = Convert.ToInt32(Console.ReadLine());
+int C1 = Convert.ToInt32(Console.ReadLine());
+int C2 = Convert.ToInt32(Console.ReadLine());
+int C3 = Convert.ToInt32(Console.ReadLine());
+int C4 = Convert.ToInt32(Console.ReadLine());
+int C5 = Convert.ToInt32(Console.ReadLine());
+int C6 = Convert.ToInt32(Console.ReadLine());
+int a = int.MaxValue, b = int.MaxValue, c = int.MaxValue, d = int.MaxValue, e = int.MaxValue, f = int.MaxValue;
+a = (2 * X + 2 * Y) * (C5 + C4) + (C2 + C6) * L;
+if (L < X)
+{
+    b = (X - L) * (C5 + C4) + (X + 2 * Y) * (C5 + C4) + L * (C1);
+    c = (X - L) * (C5 + C4) + (X + 2 * Y) * (C5 + C4) + L * (C2 + C3);
+}
+if (L == X)
+{
+    b = (X + 2 * Y) * (C5 + C4) + L * (C1);
+    c = (X + 2 * Y) * (C5 + C4) + L * (C2 + C3);
+}
+if (L > X)
+{
+    int P = (2 * X + 2 * Y);
+    
+    d = (X + 2 * Y) * (C5 + C4) + X * C1 + (L - X) * (C2 + C6);
+    e = (X + 2 * Y) * (C5 + C4) + (L - X) * (C2 + C6) + X * (C2 + C3);
+    
+    if (L<=P)
+    {
+        b = (P - L) * (C5 + C4) + X * C1 + (L - X) * (C2 + C3);
+        c = (P - L) * (C5 + C4) + L * (C2 + C3);
+    }
+    if (L>P)
+    {
+        b = X * C1 + (L-X)*C2 + (P-X)*C3 + (L-P)*C6;
+        c = L * C2 + P * C3 + (L - P) * C6;
+        f = Y * C1 + (L-Y)*C2 + (P-Y)*C3 + (L-P)*C6;
+    }
+}
+int min1 = Math.Min(Math.Min(Math.Min(c, b), Math.Min(d,e)), Math.Min(a,f));
+
+int x = X;
+X = Y;
+Y = x;
+if (L < X)
+{
+    b = (X - L) * (C5 + C4) + (X + 2 * Y) * (C5 + C4) + L * (C1);
+    c = (X - L) * (C5 + C4) + (X + 2 * Y) * (C5 + C4) + L * (C2 + C3);
+}
+if (L == X)
+{
+    b = (X + 2 * Y) * (C5 + C4) + L * (C1);
+    c = (X + 2 * Y) * (C5 + C4) + L * (C2 + C3);
+}
+if (L > X)
+{
+    int P = (2 * X + 2 * Y);
+
+    d = (X + 2 * Y) * (C5 + C4) + X * C1 + (L - X) * (C2 + C6);
+    e = (X + 2 * Y) * (C5 + C4) + (L - X) * (C2 + C6) + X * (C2 + C3);
+
+    if (L <= P)
+    {
+        b = (P - L) * (C5 + C4) + X * C1 + (L - X) * (C2 + C3);
+        c = (P - L) * (C5 + C4) + L * (C2 + C3);
+    }
+}
+int min2 = Math.Min(Math.Min(Math.Min(c, b), Math.Min(d, e)), Math.Min(a, f));
+Console.WriteLine(Math.Min(min1, min2));
