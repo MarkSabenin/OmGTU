@@ -1,0 +1,7 @@
+int k = Convert.ToInt32(Console.ReadLine());
+int l = Convert.ToInt32(Console.ReadLine());
+int n = Convert.ToInt32(Console.ReadLine());
+int m = Convert.ToInt32(Console.ReadLine());
+int p = 2 * m + 2 * n;
+int s = k*((2*l + p) + m*(k - 1));
+Console.WriteLine(s);
