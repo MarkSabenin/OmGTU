@@ -3,3 +3,134 @@
 условия: группа выходит с восходом солнца, остановка в том пункте, после которог туристы не успевают дойти до следующего, т. к. солнце село
 выход: какие пункты посетят туристы, и сколько дней нужно, чтобы пройти заданное расстояние
 (в пункт заходим, только если не успеваем до следующего до ночи; выходим с восходом)
+namespace ConsoleApplication21
+{
+    class Item
+    {
+        string name = "abc";
+        string unit = "dfg";
+        int cost = 0;
+
+        public Item(string name, string unit, int cost)
+        {
+            this.name = name;
+            this.unit = unit;
+            this.cost = cost;
+        }
+        public string Unit
+        {
+            get { return unit; }
+            set { unit = value; }
+        }
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+        public int Cost
+        {
+            get { return cost; }
+            set { cost = value; }
+        }
+    }
+
+    class Product : Item
+    {
+        int storage_life = 2023;
+        int kcal = 100;
+        int protein = 100;
+        int fats = 100;
+        int carb = 100;
+        public Product(int storage_life, int kcal, int protein, int fats, int carb, string name, string unit, int cost)
+            : base(name, unit, cost)
+        {
+            this.storage_life = storage_life;
+            this.kcal = kcal;
+            this.protein = protein;
+            this.fats = fats;
+            this.carb = carb;
+        }
+        public int Stor_Life
+        {
+            get { return storage_life; }
+            set { storage_life = value; }
+        }
+        public int Kcal
+        {
+            get { return kcal; }
+            set { kcal = value; }
+        }
+        public int Protein
+        {
+            get { return protein; }
+            set { protein = value; }
+        }
+        public int Fats
+        {
+            get { return fats; }
+            set { fats = value; }
+        }
+        public int Carb
+        {
+            get { return carb; }
+            set { carb = value; }
+        }
+        public void Print1()
+        {
+            Console.WriteLine("Наименование: {0}", this.Name);
+            Console.WriteLine("Единицы измерения: {0}", this.Unit);
+            Console.WriteLine("Стоимость товара: {0} рублей/ед.измерения", this.Cost);
+            Console.WriteLine("Срок годности: до {0} года", this.storage_life);
+            Console.WriteLine("Энергетическая ценность: {0} ккал", this.kcal);
+            Console.WriteLine("Белки: {0}", this.protein);
+            Console.WriteLine("Жиры: {0}", this.fats);
+            Console.WriteLine("Углеводы: {0}", this.carb);
+        }
+    }
+    class Building : Item
+    {
+        string mat = "air";
+        public Building(string mat, string name, string unit, int cost)
+            : base(name, unit, cost)
+        {
+            this.mat = mat;
+        }
+        public string Material
+        {
+            get { return mat; }
+            set { mat = value; }
+        }
+        public void Print2()
+        {
+            Console.WriteLine("Наименование: {0}", this.Name);
+            Console.WriteLine("Единицы измерения: {0}", this.Unit);
+            Console.WriteLine("Стоимость товара: {0} рублей/ед.измерения", this.Cost);
+            Console.WriteLine("Материал: {0}", this.mat);
+        }
+    }
+    
+        static void Main(string[] args)
+        {
+            Product[] prm = new Product[4];
+            prm[0] = new Product("Жидкое мясо", "литр", 500, 2050, 500, 100, 200);
+            prm[1] = new Product("Медовик", "штука", 400, 2025, 200, 400, 500);
+            prm[2] = new Product("Кокакола лайт", "литр", 50, 100, 200, 400);
+            prm[3] = new Product("Пельмени", "пельмень", 200, 1000, 300, 300, 300);
+            Building[] bm = new Product[4];
+            bm[0] = new Product("Кирпичи", "кг", 50, "кирпичная субстанция");
+            bm[1] = new Product("Нанотрубки", "милиметр в кв.", 100000, "углерод");
+            bm[2] = new Product("Гвозди", "штука", 10, "нержавейка");
+            bm[3] = new Product("Ледяные блоки", "градус цельсия", 0, "лёд");
+
+            Console.WriteLine("Список продуктов:");
+            for (int i = 0; i < 8; i++)
+            {
+                Console.WriteLine(prm[i].Name);
+            }
+        }
+}
+
+
+
+
+
