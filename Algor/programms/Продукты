@@ -1,0 +1,142 @@
+class Item
+        {
+            string name = "abc";
+            string unit = "dfg";
+            int cost = 0;
+
+            public Item(string name, string unit, int cost)
+            {
+                this.name = name;
+                this.unit = unit;
+                this.cost = cost;
+            }
+            public string Name
+            {
+                get { return name; }
+                set { name = value; }
+            }
+            public string Unit
+            {
+                get { return unit; }
+                set { unit = value; }
+            }
+            public int Cost
+            {
+                get { return cost; }
+                set { cost = value; }
+            }
+        }
+
+        class Product : Item
+        {
+            int storage_life = 2023;
+            int kcal = 100;
+            int protein = 100;
+            int fats = 100;
+            int carb = 100;
+            public Product(int storage_life, int kcal, int protein, int fats, int carb, string name, string unit, int cost)
+                : base(name, unit, cost)
+            {
+                this.storage_life = storage_life;
+                this.kcal = kcal;
+                this.protein = protein;
+                this.fats = fats;
+                this.carb = carb;
+            }
+            public int Stor_Life
+            {
+                get { return storage_life; }
+                set { storage_life = value; }
+            }
+            public int Kcal
+            {
+                get { return kcal; }
+                set { kcal = value; }
+            }
+            public int Protein
+            {
+                get { return protein; }
+                set { protein = value; }
+            }
+            public int Fats
+            {
+                get { return fats; }
+                set { fats = value; }
+            }
+            public int Carb
+            {
+                get { return carb; }
+                set { carb = value; }
+            }
+            public void Print1()
+            {
+                
+                Console.WriteLine("Единицы измерения: {0}", this.Unit);
+                Console.WriteLine("Стоимость товара: {0} рублей/ед.измерения", this.Cost);
+                Console.WriteLine("Срок годности: до {0} года", this.storage_life);
+                Console.WriteLine("Энергетическая ценность: {0} ккал", this.kcal);
+                Console.WriteLine("Белки: {0}", this.protein);
+                Console.WriteLine("Жиры: {0}", this.fats);
+                Console.WriteLine("Углеводы: {0}", this.carb);
+                
+            }
+        }
+        class Building : Item
+        {
+            string mat = "air";
+            public Building(string name, string unit, string mat, int cost)
+                : base(name, unit, cost)
+            {
+                this.mat = mat;
+            }
+            public string Material
+            {
+                get { return mat; }
+                set { mat = value; }
+            }
+            public void Print2()
+            {
+                
+                Console.WriteLine("Единицы измерения: {0}", this.Unit);
+                Console.WriteLine("Стоимость товара: {0} рублей/ед.измерения", this.Cost);
+                Console.WriteLine("Материал: {0}", this.mat);
+                
+            }
+        }
+
+        static void Main()
+        {
+            Product[] prm = new Product[4];
+            prm[0] = new Product(5000, 205, 1000, 500, 100, "Жидкое мясо", "литр", 200);
+            prm[1] = new Product(2050, 202, 200, 400, 1000, "Медовик", "штука", 500);
+            prm[2] = new Product(2025, 500, 100, 200, 100, "Кокакола лайт", "литр", 400);
+            prm[3] = new Product(2023,  200, 1000, 300, 300,"Пельмени", "пельмень", 300);
+            Building[] bm = new Building[4];
+            bm[0] = new Building("Кирпичи", "кг", "кирпичная субстанция", 50);
+            bm[1] = new Building("Нанотрубки", "милиметр в кв.", "углерод", 100000);
+            bm[2] = new Building("Гвозди", "штука", "нержавейка", 10);
+            bm[3] = new Building("Ледяные блоки", "градус цельсия", "лёд", 0);
+
+            Console.WriteLine("Список продуктов:");
+            for (int i = 0; i < 4; i++)
+            {
+                Console.WriteLine(prm[i].Name);
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                Console.WriteLine(bm[i].Name);
+            }
+            Console.WriteLine("О чем хотите узнать???");
+            string a = Console.ReadLine();
+            bool f = false;
+            for (int i = 0; i<4; i++)
+            {
+                if (a == prm[i].Name) {prm[i].Print1(); f = true;}
+            }
+            if (!f)
+            for (int i =0; i<4; i++)
+            {
+                if (a == bm[i].Name) {bm[i].Print2(); f = true;}
+            }
+            if (!f) Console.WriteLine("Опечатка");
+        }
