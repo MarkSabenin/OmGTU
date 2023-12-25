@@ -1,0 +1,55 @@
+Console.WriteLine("Введите длину пути ");
+int ll = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите количество перевалочных пунктов ");
+int n = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите среднюю скорость туристов ");
+double v = Convert.ToDouble(Console.ReadLine());
+Console.WriteLine("Введите расстояния до каждого пункта ");
+int[] l = new int[n + 1];
+for (int i = 0; i < n + 1; i++)
+{
+    if (i == n) l[i] = ll;
+    else l[i] = Convert.ToInt32(Console.ReadLine());
+}
+int[] p = new int[n];
+for (int i = 0; i < n; i++) p[i] = i;
+Console.WriteLine("Введите время восхода и заката ");
+int tvh = Convert.ToInt32(Console.ReadLine());
+int tvm = Convert.ToInt32(Console.ReadLine());
+int tzh = Convert.ToInt32(Console.ReadLine());
+int tzm = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine();
+bool hihihi = false;
+if (ll == 0 || tvm > 60 || tzm > 60 || tvh > 24 || tzh > 24 || n==0) {Console.WriteLine("Некорректнеый ввод"); hihihi = true;}
+for (int i = 0; i < n;i++) if (l[i] >= l[i + 1] || l[i] == 0) { Console.WriteLine("Некорректнеый ввод"); hihihi = true; break; }
+int th, tm;
+th = tzh - tvh;
+if (tzm < tvm) { tm = tzm - tvm + 60; th--; }
+else tm = tzm - tvm;
+int t = tm + 60 * th;
+v = v / 60;
+double s = v * t;
+int r = 0;
+int days = 1;
+double s1 = s;
+bool f = false;
+bool dead = false;
+if (!hihihi)
+{
+    for (int i = 0; i < n + 2; i++)
+    {
+        if (s > ll) break;
+        if (s > r) r = l[i];
+        else
+        {
+            if (s == r) { p[i - 1]++; s = r + s1; i--; days++; f = true; }
+            else if (s < r) { if (i == 1) { Console.WriteLine("Не успеют, всех сожрут"); dead = true; break; } else p[i - 2]++; s = l[i - 2] + s1; days++; i--; f = true; }
+            if (s < r) { Console.WriteLine("Не успеют, всех сожрут"); break; }
+        }
+    }
+    if (!dead)
+    {
+        if (f == false) { Console.WriteLine("Дошли без перерывов"); }
+        else if (f == true) { Console.WriteLine("Дошли за {0} дней, остановились в точках", days); for (int j = 0; j < n; j++) if (p[j] != j) Console.WriteLine(" " + p[j]); }
+    }
+}
