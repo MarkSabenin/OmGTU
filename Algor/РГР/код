@@ -1,0 +1,49 @@
+Console.WriteLine("Выберите диапазон");
+            int n = Convert.ToInt32(Console.ReadLine());
+            var rand = new Random();
+            int a = rand.Next(n+1);
+            Console.WriteLine("Выберите сложность (количество попыток); введите 0, если хотите неограниченное количество попыток");
+            int d = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Игра началась!");
+            if (d != 0)
+            {
+                bool w = false;
+                int cp = 0;
+                for (int i = 0; i < d; i++)
+                {
+                    if (i == 0)
+                    {
+                        Console.WriteLine("Введите число");
+                        int c = Convert.ToInt32(Console.ReadLine());
+                        if (c < a) Console.WriteLine("Число меньше задуманного");
+                        else if (c > a) Console.WriteLine("Ваше число больше задуманного");
+                        else if (c == a) { Console.WriteLine("Победа! Вы угадали число"); w = true; break; }
+                        cp = c;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Введите число");
+                        int c = Convert.ToInt32(Console.ReadLine());
+                        string add = "";
+                        if (Math.Abs(a - c) > Math.Abs(a - cp)) add = "Холоднее. ";
+                        if (Math.Abs(a - c) < Math.Abs(a - cp)) add = "Теплее. ";
+                        if (c < a) Console.WriteLine(add + "Число меньше задуманного");
+                        else if (c > a) Console.WriteLine(add + "Ваше число больше задуманного");
+                        else if (c == a) { Console.WriteLine("Победа! Вы угадали число"); w = true; break; }
+                        cp = c;
+                    }
+                }
+                if (w == false) Console.WriteLine("Поражение... Приходите ещё!");
+            }
+            else if (d==0)
+            {
+                Console.WriteLine("Детский режим включен");
+                while (true)
+                {
+                    Console.WriteLine("Введите число");
+                    int c = Convert.ToInt32(Console.ReadLine());
+                    if (c < a) Console.WriteLine("Ваше число меньше нашего");
+                    else if (c > a) Console.WriteLine("Ваше число превышает задуманное");
+                    else if (c == a) { Console.WriteLine("Победа! Вы угадали число"); break; }
+                }
+            }
