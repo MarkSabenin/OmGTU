@@ -1,0 +1,101 @@
+using System;
+using System.Collections.Generic;
+class HelloWorld {
+  
+     public class Aud
+{
+    int sit = 0;
+    string proj = "";
+    int comp = 0;
+    int corp = 1;
+    int floor = 1;
+    int num = 1;
+    public Aud(int sit, string proj, int comp, int corp, int floor, int num)
+    {
+        this.sit = sit;
+        this.proj = proj;
+        this.comp = comp;
+        this.corp = corp;
+        this.floor = floor;
+        this.num = num;
+    }
+    public int Sit
+    {
+        get { return sit; }
+        set { sit = value; }
+    }
+    public string Projector
+    {
+        
+        get { return proj; }
+        set { proj = value; }
+    }
+    public int Computers
+    {
+        get { return comp; }
+        set { comp = value; }
+    }
+    public int Corps
+    {
+        get { return corp; }
+        set { corp = value; }
+    }
+    public int Floor
+    {
+        get { return floor; }
+        set { floor = value; }
+    }
+    public int Number
+    {
+        get { return num; }
+        set { num = value; }
+    }
+}
+    
+
+      class Menu
+      {
+          
+          
+          public void PrintMenu()
+          {
+              Console.WriteLine("Че?");
+              Console.WriteLine("1) Создание бд");
+              Console.WriteLine("2) Дополнение бд");
+              Console.WriteLine("3) Выборки 1");
+              Console.WriteLine("4) Выборки 2");
+              Console.WriteLine("5) Выборки 3");
+              Console.WriteLine("6) Выборки 4");
+              Console.WriteLine("7) Изменение данных");
+              Console.WriteLine("8) Вывод всех данных");
+              Console.WriteLine("9) Выход");
+          }
+          
+      }
+      static void Main() {
+          
+          PrintMenu();
+          List<Aud> auds = new List<Aud>();
+          Console.WriteLine("Введите че?");
+          int c = Convert.ToInt32(Console.ReadLine());
+          while (true)
+          {
+              if (c==1)
+              {
+                  Console.WriteLine("Пора создать бд!");
+                  Console.WriteLine("");
+                  int n = Convert.ToInt32(Console.ReadLine());
+                  for (int i = 0; i<n; i++)
+                  {
+                      auds[i].Number = Convert.ToInt32(Console.ReadLine());
+                  }
+              }
+          }
+          
+    Console.WriteLine("Hello World");
+  }
+}
+
+
+
+
