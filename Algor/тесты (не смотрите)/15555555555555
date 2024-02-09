@@ -1,0 +1,41 @@
+Console.WriteLine("Введите количество вершин");
+            int m = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Введите названия вершин");
+            int[] p = new int[m];
+            for (int i = 0; i < m; i++)
+                p[i] = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Введите количество рёбер");
+            int n = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Введите названия ребер");
+            int[,] name = new int[n,2];
+            for (int i = 0; i < n; i++)
+                for (int j = 0; j < 2; j++)
+                name[i,j] = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Введите ves рёбер");
+            int[] ves = new int[n];
+            int[] sort_index = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                ves[i] = Convert.ToInt32(Console.ReadLine());
+            }
+            for (int i = 0; i < n; i++)
+            {
+                int minval = ves.Min();
+                int indmin = Array.IndexOf(ves, minval);
+                Console.WriteLine("---------");
+                foreach (int a in ves)
+                {
+                    Console.WriteLine(a);
+                }
+                Console.WriteLine("---------");
+                if (minval != int.MaxValue)
+                {
+
+                    sort_index[i] = indmin;
+                    ves[indmin] = int.MaxValue;
+                }
+                
+            }
+            foreach (int a in sort_index)
+            Console.WriteLine(a);
