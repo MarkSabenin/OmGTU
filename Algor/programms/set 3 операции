@@ -1,0 +1,47 @@
+SortedSet<string> a = new SortedSet<string>();
+            SortedSet<string> b = new SortedSet<string>();
+            SortedSet<string> c = new SortedSet<string>();
+            Console.WriteLine("Введите количество элементов в а");
+            int ac = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Введите количество элементов в b");
+            int bc = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Введите количество элементов в c");
+            int cc = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Введите элементы в а");
+            for (int i = 0; i < ac; i++)
+            {
+                a.Add(Console.ReadLine());
+            }
+            Console.WriteLine("Введите элементы в b");
+            for (int i = 0; i < bc; i++)
+            {
+                b.Add(Console.ReadLine());
+            }
+            Console.WriteLine("Введите элементы в c");
+            for (int i = 0; i < cc; i++)
+            {
+                c.Add(Console.ReadLine());
+            }
+            SortedSet<string> u = new SortedSet<string>();
+            u.UnionWith(a);
+            u.UnionWith(b);
+            u.UnionWith(c);
+            SortedSet<string> inter = new SortedSet<string>(a);
+            inter.IntersectWith(b);
+            inter.IntersectWith(c);
+            SortedSet<string> dop_a = new SortedSet<string>(u);
+            SortedSet<string> dop_b = new SortedSet<string>(u);
+            SortedSet<string> dop_c = new SortedSet<string>(u);
+            dop_a.ExceptWith(a);
+            dop_b.ExceptWith(b);
+            dop_c.ExceptWith(c);
+            Console.WriteLine("Объединение множеств: ");
+            foreach (string s in u) Console.WriteLine(s);
+            Console.WriteLine("Пересечение множеств: ");
+            foreach (string s in inter) Console.WriteLine(s);
+            Console.WriteLine("Дополнение множества а: ");
+            foreach (string s in dop_a) Console.WriteLine(s);
+            Console.WriteLine("Дополнение множества b: ");
+            foreach (string s in dop_b) Console.WriteLine(s);
+            Console.WriteLine("Дополнение множества c: ");
+            foreach (string s in dop_c) Console.WriteLine(s);
