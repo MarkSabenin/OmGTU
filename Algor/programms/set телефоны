@@ -1,0 +1,10 @@
+SortedSet<string> tlen = new SortedSet<string>();
+SortedSet<string> m = new SortedSet<string>();
+while (true)
+{
+    string vv = Console.ReadLine();
+    if (vv == "END") break;
+    else { tlen.Add(vv); m.Add(Console.ReadLine()); Console.WriteLine(); }
+}
+Console.WriteLine("Количество уникальных номеров: " + tlen.Count);
+foreach (string s in tlen) Console.WriteLine(s);
