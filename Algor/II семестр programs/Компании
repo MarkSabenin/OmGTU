@@ -1,0 +1,164 @@
+namespace algor
+{
+    class Programm
+    {
+        static string Num1(string a)
+        {
+            char[] b = a.ToCharArray(0, 4);
+            string c = new string(b);
+            return c;
+        }
+        static int Num2(string c)
+        {
+            int a = Convert.ToInt32(c);
+            return a;
+        }
+        static string Name(string a)
+        {
+            char[] b = a.ToCharArray();
+            string d = "";
+            if (b.Length > 4)
+            {
+                char[] c = new char[b.Length-5];
+                for (int i = 0; i < c.Length; i++) c[i] = b[i + 5];
+                string dd = new string(c);
+                d = dd;
+            }
+            else if (b.Length == 4) 
+            {
+                d = "Незнакомсы";
+            }
+            return d;
+        }
+        public static List<T> Join<T>(List<T> first, List<T> second)
+        {
+            if (first == null)
+            {
+                return second;
+            }
+            if (second == null)
+            {
+                return first;
+            }
+            return first.Concat(second).ToList();
+        }
+
+        static void Main()
+        {
+            string po = "";
+            List<string> eb = new List<string>();
+            List<string> ep = new List<string>();
+            for (int i = 0; i < 55000; i++) 
+            {
+                  string end = Console.ReadLine();
+                  if (end != "END")
+                  {
+                    eb.Add(end);
+                    string vvod = Console.ReadLine();
+                    ep.Add(vvod);
+                    Console.WriteLine();
+                  }
+                  else if (end == "END") { Console.WriteLine("Введите номер/имя рабочего, чьих подчиненных необходимо вывести"); po = Console.ReadLine();  break; }
+            }
+            List<string> alle = Join(eb, ep);
+            for (int j = 0; j < eb.Count; j++)
+            {
+                if (Name(eb[j]) == "Незнакомсы")
+                {
+                    for (int i = 0; i < alle.Count; i++)
+                    {
+                        if (Num1(alle[i]) == eb[j] && Name(alle[i]) != "Незнакомсы") eb[j] = alle[i];
+                    }
+                }
+            }
+            for (int j = 0; j < ep.Count; j++)
+            {
+                if (Name(ep[j]) == "Незнакомсы")
+                {
+                    for (int i = 0; i < alle.Count; i++)
+                    {
+                        if (Num1(alle[i]) == ep[j] && Name(alle[i]) != "Незнакомсы") ep[j] = alle[i];
+                    }
+                }
+            }
+            bool no = false;
+            bool io = int.TryParse(po, out _);
+            List<string> ans = new List<string>();
+            if (io)
+            {
+                int po2 = Convert.ToInt32(po);
+                bool y = false;
+                for (int i = 0; i < eb.Count; i++)
+                {
+                    int sr = Num2(Num1(eb[i]));
+                    if (sr == po2) { ans.Add(ep[i]); y = true; }
+                }
+                if (!y) { Console.WriteLine("No"); no = true; }
+                else
+                    while (true)
+                    {
+                        bool f = false;
+                        for (int j = 0; j < ans.Count; j++)
+                        {
+                            for (int i = 0; i < eb.Count; i++)
+                            {
+                                if (ans[j] == eb[i] && !ans.Contains(ep[i]))
+                                {
+                                    ans.Add(ep[i]);
+                                    f = true;
+                                }
+                            }
+                        }
+                        if (!f) break;
+                    }
+            }
+            else
+            {
+                string po2 = "";
+                for (int i = 0; i<eb.Count; i++) { if (Name(eb[i]) == po) po2 = po; }
+                bool y = false;
+                for (int i = 0; i < eb.Count; i++)
+                {
+                    string sr = Name(eb[i]);
+                    if (sr == po2)
+                    {
+                        ans.Add(ep[i]);
+                        y = true;
+                    }
+                }
+                if (!y) Console.WriteLine("No");
+                else
+                while (true)
+                {
+                    bool f = false;
+                    for (int j = 0; j < ans.Count; j++)
+                    {
+                        for (int i = 0; i < eb.Count; i++)
+                        {
+                            if (ans[j] == eb[i] && !ans.Contains(ep[i]))
+                            {
+                                ans.Add(ep[i]);
+                                f = true;
+                            }
+                        }
+                    }
+                    if (!f) break;
+                }
+            }
+            if (!no) Console.WriteLine("Otvetus:");
+            Console.WriteLine();
+            int[] ans_num = new int[ans.Count];
+            string[] ans1 = new string[ans.Count];
+            for (int i = 0; i< ans_num.Length;i++)
+            {
+                ans_num[i] = Num2(Num1(ans[i]));
+            }
+            Array.Sort(ans_num);
+            for (int j = 0; j < ans.Count ; j++)
+                for (int i = 0;i< ans_num.Length;i++)
+                    if (Num2(Num1(ans[j])) == ans_num[i]) ans1[i] = ans[j];
+            for (int i = 0; i < ans1.Length; i++) if (Name(ans1[i]) == "Незнакомсы") ans1[i] += " Незнакомсы";
+            foreach (string s in ans1) Console.WriteLine(s);
+        }
+    }
+}
