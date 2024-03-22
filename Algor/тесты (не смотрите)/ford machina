@@ -1,0 +1,72 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication34
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("start");
+            int st = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("count");
+            int cv = Convert.ToInt32(Console.ReadLine());
+            double[,] sm = new double[cv,cv];
+            for (int i = 0; i < cv; i++)
+                for (int j = 0; j < cv; j++)
+                {
+                    
+                        int ii = i + 1;
+                        int jj = j+1;
+                        Console.WriteLine(ii + " " + jj);
+                        string op = Console.ReadLine();
+                        int o = 0;
+                        if (int.TryParse(op, out o)) sm[i, j] = o;
+                        else if (op == "i") { double o1 = double.PositiveInfinity; sm[i, j] = o1; }
+                    
+                }
+           // for (int i = 0; i < 12; i++) Console.WriteLine(sm[11,i]);
+            int[,] p = new int[cv, cv];
+            for (int i = 0; i < cv; i++) for (int j = 0; j < cv; j++) p[i, j] = 0;
+            double[] l1 = new double[cv];
+            double[] l2 = new double[cv];
+            double[] com = new double[cv];
+            for (int i = 0; i < cv; i++) if (i != st-1) l1[i] = sm[i, st-1]; else l1[i] = 0;
+           // foreach (double io in l1) Console.WriteLine(io);
+            for (int i = 0; i < cv; i++)
+            {
+                for (int j = 0; j < cv; j++)
+                {
+                    if (j == st-1) l2[j] = 0;
+                    else
+                    {
+                        for (int k = 0; k < cv; k++)
+                        {
+                            com[k] = l1[k] + sm[k, j];
+                        }
+                        double min = com[0];
+                        int b = 0;
+                        for (int k = 1; k < cv; k++) if (min > com[k]) { min = com[k]; b = k; }
+                        l2[j] = min;
+                        p[j, i] = b;
+                    }
+                }
+                for (int j = 0; j < 12; j++)
+                {
+                    l1[j] = l2[j];
+                }
+            }
+            Console.WriteLine();
+            Console.WriteLine("assfdsfdsf");
+            foreach (double er in l2) Console.WriteLine(er);
+            for (int i = 0; i < cv; i ++)
+            {
+                Console.WriteLine(l2[i]);
+                for (int j = 0; j < cv; j++) if (p[i,j] != 0) Console.WriteLine(p[i, j]);
+            }
+        }
+    }
+}
