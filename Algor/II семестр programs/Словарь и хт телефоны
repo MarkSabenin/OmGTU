@@ -1,0 +1,78 @@
+Queue<string> vv = new Queue<string>();
+            Queue<string> vvv = new Queue<string>();
+            bool f = true;
+            while (f)
+            {
+                string vc = Console.ReadLine();
+                if (vc == "stop") f = false;
+                else vv.Enqueue(vc);
+            }
+            Hashtable h1 = new Hashtable();
+            Dictionary<string, int> d1 = new Dictionary<string, int>();
+            Hashtable h2 = new Hashtable();
+            Dictionary<string, int> d2 = new Dictionary<string, int>();
+            for (int i = 0; i < vv.Count; i++)
+            {
+                string a1 = vv.Dequeue();
+                vvv.Enqueue(a1);
+                string a2 = vv.Dequeue();
+                vvv.Enqueue(a2);
+                string a3 = vv.Dequeue();
+                vvv.Enqueue(a3);
+                string a4 = vv.Dequeue();
+                vvv.Enqueue(a4);
+                int b1 = Convert.ToInt32(a4);
+                int op = Convert.ToInt32(h1[a1]);
+                if (!h1.Contains(a1)) h1.Add(a1, b1);
+                else h1[a1] = op + b1;
+            }
+            foreach (DictionaryEntry kv in h1) { Console.WriteLine("H1 Номер " + kv.Key); Console.WriteLine("H1 Минуты " + kv.Value); }
+            Console.WriteLine();
+            for (int i = 0; i < vvv.Count; i++)
+            {
+                string a1 = vvv.Dequeue();
+                vv.Enqueue(a1);
+                string a2 = vvv.Dequeue();
+                vv.Enqueue(a2);
+                string a3 = vvv.Dequeue();
+                vv.Enqueue(a3);
+                string a4 = vvv.Dequeue();
+                vv.Enqueue(a4);
+                int b1 = Convert.ToInt32(a4);
+                if (!d1.ContainsKey(a1)) d1.Add(a1, b1);
+                else {int op = Convert.ToInt32(d1[a1]); d1[a1] = op + b1;}
+            }
+            foreach (KeyValuePair<string, int> kv in d1) { Console.WriteLine("D1 Номер " + kv.Key); Console.WriteLine("D1 Минуты " + kv.Value); }
+            Console.WriteLine();
+            for (int i = 0; i < vv.Count; i++)
+            {
+                string a1 = vv.Dequeue();
+                vvv.Enqueue(a1);
+                string a2 = vv.Dequeue();
+                vvv.Enqueue(a2);
+                string a3 = vv.Dequeue();
+                vvv.Enqueue(a3);
+                string a4 = vv.Dequeue();
+                vvv.Enqueue(a4);
+                int b1 = Convert.ToInt32(a4);
+                int op = Convert.ToInt32(h2[a2]);
+                if (!h2.Contains(a2)) h2.Add(a2, b1);
+                else h2[a2] = op + b1;
+            }
+            foreach (DictionaryEntry kv in h2) { Console.WriteLine("H2 Дата " + kv.Key); Console.WriteLine("H2 Минуты " + kv.Value); }
+            Console.WriteLine();
+            for (int i = 0; i < vvv.Count; i++)
+            {
+                string a1 = vvv.Dequeue();
+                vv.Enqueue(a1);
+                string a2 = vvv.Dequeue();
+                vv.Enqueue(a2);
+                string a3 = vvv.Dequeue();
+                vv.Enqueue(a3);
+                string a4 = vvv.Dequeue();
+                vv.Enqueue(a4);
+                int b1 = Convert.ToInt32(a4);
+                if (!d2.ContainsKey(a2)) d2.Add(a2, b1);
+                else { int op = Convert.ToInt32(d2[a2]); d2[a2] = op + b1; }
+            }
+            foreach (KeyValuePair<string, int> kv in d2) { Console.WriteLine("D2 Дата " + kv.Key); Console.WriteLine("D2 Минуты " + kv.Value); }
