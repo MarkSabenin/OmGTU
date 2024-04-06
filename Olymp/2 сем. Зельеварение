@@ -1,0 +1,31 @@
+Console.WriteLine("Вводите слова; введите stop, если всё");
+List<string> d = new List<string>();
+while (true)
+{
+    string opa = Console.ReadLine();
+    if (opa != "stop")
+        d.Add(opa);
+    else break;
+}
+int cc = 0;
+for (int i = 0; i < d.Count; i++)
+{
+    if (i == 0)
+    {
+        if (d[i].Contains("MIX")) { d[i] = d[i].Replace("MIX ", ""); d[i] = d[i].Replace(" ", ""); d[i] = "MX" + d[i] + "XM"; }
+        else if (d[i].Contains("WATER")) { d[i] = d[i].Replace("WATER ", ""); d[i] = d[i].Replace(" ", ""); d[i] = "WT" + d[i] + "TW"; }
+        else if (d[i].Contains("DUST")) { d[i] = d[i].Replace("DUST ", ""); d[i] = d[i].Replace(" ", ""); d[i] = "DT" + d[i] + "TD"; }
+        else if (d[i].Contains("FIRE")) { d[i] = d[i].Replace("FIRE ", ""); d[i] = d[i].Replace(" ", ""); d[i] = "FR" + d[i] + "RF"; }
+    }
+    else if (i!=0)
+    {
+        for (int j = 1; j <= cc; j++) { string js = " " + j.ToString() + " ";  if (d[i].Contains(js)) d[i] = d[i].Replace(js, " " + d[j - 1] + " "); }
+        for (int j = 1; j <= cc; j++) { string js = " " + j.ToString(); if (d[i].Contains(js)) d[i] = d[i].Replace(js, " " + d[j - 1]); }
+        if (d[i].Contains("MIX")) { d[i] = d[i].Replace("MIX ", ""); d[i] = d[i].Replace(" ", ""); d[i] = "MX" + d[i] + "XM"; }
+        else if (d[i].Contains("WATER")) { d[i] = d[i].Replace("WATER ", ""); d[i] = d[i].Replace(" ", ""); d[i] = "WT" + d[i] + "TW"; }
+        else if (d[i].Contains("DUST")) { d[i] = d[i].Replace("DUST ", ""); d[i] = d[i].Replace(" ", ""); d[i] = "DT" + d[i] + "TD"; }
+        else if (d[i].Contains("FIRE")) { d[i] = d[i].Replace("FIRE ", ""); d[i] = d[i].Replace(" ", ""); d[i] = "FR" + d[i] + "RF"; }
+    }
+    cc++;
+}
+Console.WriteLine(d[d.Count - 1]);
