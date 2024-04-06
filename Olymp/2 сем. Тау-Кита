@@ -1,0 +1,60 @@
+public static string DecodeWord(string a)
+{
+    string p = "";
+    string[] aa = new string[a.Length];
+    for (int i = 0; i < a.Length; i++)
+    {
+        aa[i] = a[i].ToString();
+    }
+    if (aa.Length % 2 != 0)
+        for (int i = 0; i < (aa.Length + 1) / 2; i++)
+        {
+            if (i == 0) p = aa[aa.Length - 1 - i];
+            else p = p + " " + aa[aa.Length - i - 1];
+            if (i != (aa.Length + 1) / 2 - 1) p = p + " " + aa[i];
+        }
+    else
+    {
+        for (int i = 0; i < (aa.Length) / 2; i++)
+        {
+            if (i == 0) p = aa[i];
+            else p = p + " " + aa[i];
+            p = p + " " + aa[aa.Length - 1 - i];
+        }
+    }
+    string[] pp = p.Split(" ");
+    p = string.Join("", pp.Reverse());
+
+    return p;
+}
+static void Main()
+{
+    Console.WriteLine("Введите фразу на языке Тау-Кита");
+    string tk = Console.ReadLine();
+    if (tk.Contains(" "))
+    {
+        string[] aa = tk.Split(' ');
+        string p = "";
+        if (aa.Length % 2 != 0)
+            for (int i = 0; i < (aa.Length + 1) / 2; i++)
+            {
+                if (i == 0) p = aa[aa.Length - 1 - i];
+                else p = p + " " + aa[aa.Length - i - 1];
+                if (i != (aa.Length + 1) / 2 - 1) p = p + " " + aa[i];
+            }
+        else
+        {
+            for (int i = 0; i < (aa.Length) / 2; i++)
+            {
+                if (i == 0) p = aa[i];
+                else p = p + " " + aa[i];
+                p = p + " " + aa[aa.Length - 1 - i];
+            }
+        }
+        string[] pp = p.Split(" ");
+        for (int i = 0; i < pp.Length; i++) pp[i] = DecodeWord(pp[i]);
+        p = string.Join(" ", pp.Reverse());
+        Console.WriteLine(p);
+    }
+    else Console.WriteLine(DecodeWord(tk));
+}
