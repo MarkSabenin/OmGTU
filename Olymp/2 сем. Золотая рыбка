@@ -1,0 +1,102 @@
+public static bool Both(string a, List<char> one, List<char> oke)
+{
+    char[] aa = a.ToCharArray();
+    if (one.Contains(aa[0]) && oke.Contains(aa[aa.Length-1])) return true;
+    else return false;
+}
+public static bool Only(string a, List<char> one, List<char> oke)
+{
+    char[] aa = a.ToCharArray();
+    if (one.Contains(aa[0]) || oke.Contains(aa[aa.Length - 1])) return true;
+    else return false;
+}
+public static List<char> ON_Err(List<string> h, char[] ons, string[] on)
+{
+    int[] one = new int[ons.Length];
+    for (int i = 0; i < one.Length; i++) one[i] = 0;
+    List<char> onec = new List<char>();
+    foreach (string s in h)
+    {
+        char[] ss = s.ToCharArray();
+        for (int j = 0; j < ons.Length; j++) { if (ons[j] == ss[0]) { one[j]++;  } }
+    }
+    for (int i = 0; i < one.Length; i++)
+    {
+        string a = on[i].Substring(2);
+        int b = Convert.ToInt32(a);
+        if (one[i] > b) onec.Add(ons[i]);
+    }
+    return onec;
+}
+public static List<char> OK_Err(List<string> h, char[] oks, string[] ok)
+{
+    int[] oke = new int[oks.Length];
+    for (int i = 0; i < oke.Length; i++) oke[i] = 0;
+    List<char> okec = new List<char>();
+    foreach (string s in h)
+    {
+        char[] ss = s.ToCharArray();
+        for (int j = 0; j < oks.Length; j++) { if (oks[j] == ss[ss.Length - 1]) { oke[j]++;  } }
+    }
+    for (int i = 0; i < oke.Length; i++)
+    {
+        string a = ok[i].Substring(2);
+        int b = Convert.ToInt32(a);
+        if (oke[i] > b) okec.Add(oks[i]);
+    }
+    return okec;
+}
+static void Main()
+{
+    Console.WriteLine("Введите количество слов валшэбных");
+    int n = Convert.ToInt32(Console.ReadLine());
+    string[] vs = new string[n];
+    for (int i = 0; i < n; i++)
+    {
+        vs[i] = Console.ReadLine();
+    }
+    Console.WriteLine("Введите количество ограничений на первую славную букву");
+    int f = Convert.ToInt32(Console.ReadLine());
+    string[] on = new string[f];
+    Console.WriteLine("Запишите ограничения в формате 'b k' ");
+    for (int i = 0;i < f; i++)
+    {
+        on[i] = Console.ReadLine();
+    }
+    Console.WriteLine("Введите число ограничений на оконечную добрую букву");
+    int l = Convert.ToInt32(Console.ReadLine());
+    string[] ok = new string[l];
+    Console.WriteLine("Запишите ограничения в формате 'b k' ");
+    for (int i = 0; i < l ; i++)
+    {
+        ok[i] = Console.ReadLine();
+    }
+    char[] ons = new char[f];
+    char[] oks = new char[l];
+    for (int i = 0; i < f; i++) { char[] onc = on[i].ToCharArray(); ons[i] = onc[0]; }
+    for (int i = 0; i < l; i++) { char[] okc = ok[i].ToCharArray(); oks[i] = okc[0]; }
+    List<string> gn = new List<string>(f);
+    List<string> gk = new List<string>(l);
+    for (int i = 0; i < n; i++)
+    {
+        char[] vsc = vs[i].ToCharArray();
+        char a = vsc[0];
+        char b = vsc[vsc.Length-1];
+        for (int j = 0; j < f; j++) { if (ons[j] == a && !gn.Contains(vs[i])) gn.Add(vs[i]); }
+        for (int j = 0; j < l; j++) { if (oks[j] == b && !gk.Contains(vs[i])) gk.Add(vs[i]); }
+    }
+    List<string> h = new List<string>();
+    for (int i = 0;i < n; i++) { if ((gn.Contains(vs[i]) && gk.Contains(vs[i])) && !h.Contains(vs[i])) h.Add(vs[i]); }
+    while (true)
+    {
+        List<char> one = ON_Err(h, ons, on);
+        List<char> oke = OK_Err(h, oks, ok);
+        bool q = false;
+        bool emp = true;
+        foreach (string u in h) if (Both(u, one, oke)) { h.Remove(u); q = true; emp = false; break; }
+        if (!q) foreach (string u in h) if (Only(u, one, oke)) { h.Remove(u); emp = false; break; }
+        if (emp) break;
+    }
+    Console.Write("Ответ "); 
+    Console.WriteLine(h.Count);
+}
