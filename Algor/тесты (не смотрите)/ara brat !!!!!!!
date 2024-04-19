@@ -1,0 +1,100 @@
+using System;
+using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Выберите действие");
+            Console.WriteLine("1) Array");
+            Console.WriteLine("2) ArrayList");
+            Console.WriteLine("3) SortedLeeest");
+            int a = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Введите количество элементов");
+            int l = Convert.ToInt32(Console.ReadLine());
+            if (l == 0) Console.WriteLine("мудрила");
+            int[] ar1 = new int[l];
+            ArrayList ar2 = new ArrayList(l);
+            SortedList ar3 = new SortedList(l);
+            Console.WriteLine("Введите элементы");
+            for (int i = 0; i < l; i++) { ar1[i] = Convert.ToInt32(Console.ReadLine()); ar2.Add(Convert.ToInt32(Console.ReadLine())); ar3.Add(i, Convert.ToInt32(Console.ReadLine())); }
+
+                Console.WriteLine("Выберите действие");
+                Console.WriteLine("-----------------------------");
+                Console.WriteLine("1) Count");
+                Console.WriteLine("2) BinSearch");
+                Console.WriteLine("3) Copy");
+                Console.WriteLine("4) Find");
+                Console.WriteLine("5) FindLast");
+                Console.WriteLine("6) IndexOf");
+                Console.WriteLine("7) Reverse");
+                Console.WriteLine("8) Resize");
+                Console.WriteLine("9) Sort");
+                Console.WriteLine("0) Выход");
+                Console.WriteLine("-----------------------------");
+                int ar_a = Convert.ToInt32(Console.ReadLine());
+                if (ar_a == 1)
+                {
+                    if (a == 1) Console.WriteLine(ar1.Count());
+                    if (a == 2) Console.WriteLine(ar2.Count);
+                    if (a == 3) Console.WriteLine(ar3.Count);
+                }
+                if (ar_a == 2)
+                {
+                    Console.WriteLine("Введите элемент, который надо искать");
+                    int ar_f = Convert.ToInt32(Console.ReadLine());
+                    Console.Write("Индексс искомого элемента будет непосредственно равен конкретному числу, а если точнее: ");
+                    if (a == 1) Console.WriteLine(Array.BinarySearch(ar1, ar_f));
+                    if (a == 2) Console.WriteLine(ar2.BinarySearch(ar_f));
+                    if (a == 3) Console.WriteLine(ar3.IndexOfValue(ar_f));
+                }
+                if (ar_a == 3)
+                {
+                    Console.WriteLine("Введите число в пределах размера первой коллекции");
+                    int n_arc = Convert.ToInt32(Console.ReadLine());
+                    int[] arc = new int[l - n_arc];
+                    if (a == 1) Array.Copy(ar1, n_arc, arc, 0, l - n_arc);
+                    if (a == 2) ar2.CopyTo(arc, n_arc);
+                    if (a == 3) ar3.CopyTo(arc, n_arc);
+                    Console.Write("Полученный массив: ");
+                    foreach (int p in arc) Console.Write(p + " ");
+                }
+                if (ar_a == 4)
+                {
+                    if (a == 2 || a == 3) Console.WriteLine("Такого метода нет для этой коллекции");
+                    else
+                    {
+                        Console.WriteLine("Введите число, которое меньше искомогогого");
+                        int ar_e = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine(Array.Find(ar1, x => x > ar_e));
+                    }
+                }
+                if (ar_a == 5)
+                {
+                    if (a == 2 || a == 3) Console.WriteLine("Такого метода нет для этой коллекции");
+                    else
+                    {
+                        Console.WriteLine("Введите число, которое больше искомогогого");
+                        int ar_r = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine(Array.FindLast(ar1, x => x < ar_r));
+                    }
+                }
+                if (ar_a == 6)
+                {
+                    Console.WriteLine("Введите значение элемента массива ar, чтобы мы могли использовать на нём метод для осуществления поиска и, в послдедлдваие, нахождения искомого нами индекса с дальнейшим прямым выводом этого самого солнечного классного и просто прикольного индекс ищем его");
+                    int ar_t = Convert.ToInt32(Console.ReadLine());
+                    if (a == 1) Console.WriteLine(Array.IndexOf(ar1, ar_t));
+                    if (a == 2) Console.WriteLine(ar2.IndexOf(ar_t));
+                    if (a == 3) Console.WriteLine(ar3.GetByIndex(ar_t));
+                }
+            
+
+        }
+    }
+}
