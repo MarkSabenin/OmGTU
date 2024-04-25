@@ -1,0 +1,102 @@
+namespace algor
+{
+    class Program
+    {
+        public interface IIriski
+        {
+            double Sum(double x, double y);
+            double Dif(double x, double y);
+            double Time(double x, double y);
+            double Div(double x, double y);
+            double Sqrt(double x);
+            double Sin(double x);
+            double Cos(double x);
+        }
+        class Op : IIriski
+        {
+            public double Sum(double x, double y) {  return x+y; }
+            public double Dif(double x, double y) { return x-y; }
+            public double Time(double x, double y) { return x * y; }
+            public double Div(double x, double y) { return x/y; }
+            public double Sqrt(double x) { return Math.Sqrt(x); }
+            public double Sin(double x) { return Math.Sin(x); }
+            public double Cos(double x) { return Math.Cos(x); }
+        }
+        delegate double Bin(double x, double y);
+        delegate double Un(double x);
+        static void Main()
+        {
+            Op op = new Op();
+            while (true)
+            {
+                Console.WriteLine("Выберите тип операции");
+                Console.WriteLine("-----------------------------");
+                Console.WriteLine("1) Сложение");
+                Console.WriteLine("2) Вычитание");
+                Console.WriteLine("3) Умножение");
+                Console.WriteLine("4) Деление");
+                Console.WriteLine("5) Изъятие квадратного корня");
+                Console.WriteLine("6) Синус числа");
+                Console.WriteLine("7) Косинус числа");
+                Console.WriteLine("8) Выход из программы");
+                Console.WriteLine("-----------------------------");
+                int c = Convert.ToInt32(Console.ReadLine());
+                if (c == 8) { Console.WriteLine("Пакааааааа"); break; }
+                if (c == 1)
+                {
+                    Console.WriteLine("Введите числа");
+                    double x = Convert.ToDouble(Console.ReadLine());
+                    double y = Convert.ToDouble(Console.ReadLine());
+                    Bin b = op.Sum;
+                    Console.WriteLine(x + " + " + y + " = " + b(x,y) );
+                }
+                if (c == 2)
+                {
+                    Console.WriteLine("Введите числа");
+                    double x = Convert.ToDouble(Console.ReadLine());
+                    double y = Convert.ToDouble(Console.ReadLine());
+                    Bin b = op.Dif;
+                    Console.WriteLine(x + " - " + y + " = " + b(x, y));
+                }
+                if (c == 3)
+                {
+                    Console.WriteLine("Введите числа");
+                    double x = Convert.ToDouble(Console.ReadLine());
+                    double y = Convert.ToDouble(Console.ReadLine());
+                    Bin b = op.Time;
+                    Console.WriteLine(x + " * " + y + " = " + b(x, y));
+                }
+                if (c == 4)
+                {
+                    Console.WriteLine("Введите числа");
+                    double x = Convert.ToDouble(Console.ReadLine());
+                    double y = Convert.ToDouble(Console.ReadLine());
+                    Bin b = op.Div;
+                    Console.WriteLine(x + " / " + y + " = " + b(x, y));
+                }
+                if (c == 5)
+                {
+                    Console.WriteLine("Введите число");
+                    double x = Convert.ToDouble(Console.ReadLine());
+                    Un b = op.Sqrt;
+                    Console.WriteLine(x + " ^0.5" + " = " + b(x));
+                }
+                if (c == 6)
+                {
+                    Console.WriteLine("Введите число");
+                    double x = Convert.ToDouble(Console.ReadLine());
+                    Un b = op.Sin;
+                    Console.WriteLine("sin(" + x + ") = " + b(x));
+                }
+                if (c == 7)
+                {
+                    Console.WriteLine("Введите число");
+                    double x = Convert.ToDouble(Console.ReadLine());
+                    Un b = op.Cos;
+                    Console.WriteLine("cos(" + x + ") = " + b(x));
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
