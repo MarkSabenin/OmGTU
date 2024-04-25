@@ -15,7 +15,7 @@ namespace ConsoleApplication37
     {
         static void Main()
         {
-            int n = 55;
+            int n = 5;
             string[,,,] uzh = new string[n+1,n,10,10];
             string w = "";
             int ff = 0;
@@ -159,26 +159,29 @@ namespace ConsoleApplication37
 
                 if (uzh[i, 0, 0, 0] != null)
                 {
+                    Console.Write(uzh[i,0,0,0] + ": ");
                     for (int y = 0; y < n; y++)
                     {
-                        if (uzh[i, y, 0, 0] != null)
+                        if (uzh[i, y, 0, 0] != null && uzh[i, y, 0, 0]!= uzh[i, 0, 0, 0])
                         {
+                            Console.Write(uzh[i,y,0,0] + " - ");
                             c = 0;
                             for (int j = 1; j < n; j++)
                             {
                                 if (uzh[i, y, j, 0] != null)
+                                {
                                     for (int u = 1; u < n; u++)
                                     {
-
-                                         if (uzh[i, y, j, 0] != null) c++;
+                                        if (uzh[i, y, j, u] != null) c += Convert.ToInt32(uzh[i, y, j, u]);
                                     }
+                                }
                             }
-                            if (total < c) { eeem = uzh[i, y, 0, 0]; total = c; }
+                            Console.WriteLine(c);
                         }
                     }
                 }
             }
-
+            
         }
     }
 }
