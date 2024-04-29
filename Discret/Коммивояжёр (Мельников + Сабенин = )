@@ -57,7 +57,6 @@ int[,] m = new int[5, 5];
                             if (m[i, j] != 100) m[i, j] -= min2;
                     }
                     o = o + s1 + s2;
-                    //Console.WriteLine("o: " + o);
                     int min = 0;
                     int[] ij = new int[2];
                     for (int i = 0; i < n; i++)
