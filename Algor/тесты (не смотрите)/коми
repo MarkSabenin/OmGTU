@@ -1,17 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleApplication36
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            int[,] m = new int[5, 5];
+int[,] m = new int[5, 5];
             m[0, 1] = 41;
             m[0, 2] = 17;
             m[0, 3] = 23;
@@ -61,7 +48,7 @@ namespace ConsoleApplication36
                         for (int j = 0; j < n; j++)
                             if (m[i, j] != 100) m[i, j] -= min1;
                     }
-
+                    
                     for (int j = 0; j < n; j++)
                     {
                         int min2 = 100;
@@ -75,7 +62,7 @@ namespace ConsoleApplication36
                     //  for (int i = 0; i < n; i++)
                     //      for (int j = 0; j < n; j++) if (j != 4) Console.Write(m[i, j] + " "); else Console.WriteLine(m[i, j]);
                     o = o + s1 + s2;
-                    Console.WriteLine("o: " + o);
+                    //Console.WriteLine("o: " + o);
                     int min = 0;
                     int[] ij = new int[2];
                     for (int i = 0; i < n; i++)
@@ -100,25 +87,30 @@ namespace ConsoleApplication36
                                 }
                             }
                         }
+                    f = 2;
                     zn.Add(ij[0]); zn.Add(ij[1]);
-                    dr[f, 0] = ij[0];   dr[f, 1] = ij[1];
-                    f++;
-                    for (int i = 0; i < n - 2; i++)
-                    {
-                        if (dr[f, 0] == dr[i, 1]) 
-                    }
+                   // dr[f, 0] = ij[0];   dr[f, 1] = ij[1];
+                 //   for (int i = 0; i < f; i++)
+                //    {
+                //        if (dr[f, 0] == dr[i, 1]) { dr[i, 0] = dr[f, 0]; dr[f, 1] = -1; dr[f, 0] = -1; }
+                //    }
+                //    for (int i = 0; i < f; i++)
+                //    {
+                //        if (dr[f, 1] == dr[i, 0]) { dr[i, 1] = dr[f, 1]; dr[f, 1] = -1; dr[f, 0] = -1; }
+                //    }
+                //    f++;
                         // Console.WriteLine(ij[0] + " ij " + ij[1]);
                         m[ij[1], ij[0]] = 100;
                     for (int i = 0; i < n; i++) m[ij[0], i] = 100;
                     for (int i = 0; i < n; i++) m[i, ij[1]] = 100;
-                    for (int i = 0; i < n; i++)
-                        for (int j = 0; j < n; j++) if (j != 4) Console.Write(m[i, j] + " "); else Console.WriteLine(m[i, j]);
-                    //int y = 0;
-                    // foreach (int i in m) if (i != 100) y++;
-                    // if (y <= 2) break;
+                  //  for (int i = 0; i < n; i++)
+               //         for (int j = 0; j < n; j++) if (j != 4) Console.Write(m[i, j] + " "); else Console.WriteLine(m[i, j]);
+                    int y = 0;
+                     foreach (int i in m) if (i != 100) y++;
+                     if (y == 1) break;
                 }
+                Console.Write("Цикл, который прошел товарищ коми(Вояджер1): ");
+                foreach (int yy in zn) { int yy1 = yy+1; Console.Write(yy1 + " "); }
+                foreach (int yy in zn) { int yy1 = yy + 1; Console.WriteLine(yy1 + " "); break; }
+                Console.Write("Длина пройденного пути: ");
             Console.WriteLine(o);
-            Console.ReadKey();
-        }
-    }
-}
