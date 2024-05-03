@@ -1,0 +1,89 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication7
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[,] v = new int[7,7];
+            int[,] red = new int[7, 7];
+            List<int> s = new List<int>();
+            for (int i = 0; i < 7; i++)
+                for (int j = 0; j < 7; j++)
+                {
+                    Console.Write(i+1);
+                    Console.Write(" ");
+                    Console.WriteLine(j+1);
+                    if (i != j)
+                        v[i, j] = Convert.ToInt32(Console.ReadLine());
+                    else v[i, j] = 0;
+                    red[i, j] = 0;
+                }
+            for (int i = 0; i < 7; i++)
+                for (int j = 0; j < 7; j++) if (j != 6) Console.Write(v[i, j] + " "); else Console.WriteLine(v[i, j]);
+            int x1 = 0;
+            s.Add(0);
+            Console.WriteLine("Маршрут начинаем с точки 1");
+            while (true)
+            {
+                int x2 = 0;
+                for (int i = 0; i < 7; i++) if ((v[x1, i] == 1 && red[x1, i] != 1) && !s.Contains(v[x1, i])) { x2 = i; red[x1, i] = 1; s.Add(x2); }
+                if (s.Count == 7) break;
+                x1 = x2;
+
+                foreach (int y in s) Console.Write(y + " ");
+            }
+            foreach (int y in s) Console.Write(y + " ");
+            Console.ReadKey();
+        }
+    }
+}
+/*
+1
+1
+1
+0
+0
+0
+1
+1
+0
+1
+0
+1
+1
+1
+1
+1
+1
+1
+1
+0
+1
+1
+1
+1
+0
+1
+1
+1
+1
+0
+0
+0
+1
+1
+1
+1
+0
+1
+1
+1
+0
+1
+*/
