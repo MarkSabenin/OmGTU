@@ -1,0 +1,150 @@
+namespace algor
+{
+    class Program
+    {
+        class Acc
+        {
+            string n = "";
+            string fio = "";
+            string p = "";
+            double d = 0;
+            double r = 0;
+            double u = 0;
+            public Acc(string n, string fio, string p, double d, double r, double u)
+            {
+                this.n = n;
+                this.fio = fio;
+                this.p = p;
+                this.d = d;
+                this.r = r;
+                this.u = u;
+            }
+            public string Num
+            {
+                get { return n; }
+                set { n = value; }
+            }
+            public string Fio
+            {
+                get { return fio; }
+                set { fio = value; }
+            }
+            public string Phone
+            {
+                get { return p; }
+                set { p = value; }
+            }
+            public double Dohod
+            {
+                get { return d; }
+                set { d = value; }
+            }
+            public double Rashod
+            {
+                get { return r; }
+                set { r = value; }
+            }
+            public double Uplatit
+            {
+                get { return u; }
+                set { u = value; }
+            }
+            public double Balance (double d, double r, double u)
+            {
+                double b = (d - r - u) / d;
+                return b;
+            }
+        }
+        static void Main()
+        {
+            int q = 0;
+            Acc[] archive = new Acc[7];
+            archive[0] = new Acc("1","Сабенин Марк Алексеевич","89136728751",1000,800,50);
+            archive[1] = new Acc("2", "Девятерикова Марина Владимировна", "999999999", 99999, 99, 4999.95);
+            archive[2] = new Acc("3", "Катамаранов Игорь", "Потерял", 500, 480, 25);
+            archive[3] = new Acc("4", "Волшебный Гном", "246810", 8800, 400, 440);
+            archive[4] = new Acc("5", "Мудрый Кот с Яблоком", "484226862624", 10000, 10, 500);
+            archive[5] = new Acc("6", "Борис Трушин", "11235813", 30000, 800, 1500);
+            archive[6] = new Acc("7", "Принцесса Нури", "44447777", 500000, 1000000, 2500);
+            Console.WriteLine("Хотите сами вводить значения или воспользоваться готовым архивом?");
+            Console.WriteLine("1) Сам");
+            Console.WriteLine("2) Готовый архив (см ниже)");
+            Console.WriteLine();
+            for (int i = 0; i < archive.Length; i++)
+            {
+                Console.Write("Счет номер " + archive[i].Num + ": ");
+                Console.Write(archive[i].Fio + ", ");
+                Console.Write("Номер телефона: " + archive[i].Phone + ", ");
+                Console.Write("Размер доходов: " + archive[i].Dohod + ", ");
+                Console.Write("Размер расходов: " + archive[i].Rashod + ", ");
+                Console.WriteLine("Долг: " + archive[i].Uplatit + ";");
+            }
+            int ch = Convert.ToInt32(Console.ReadLine());
+            if (ch == 1)
+            {
+                Console.WriteLine("Введите длину архива");
+                int l = Convert.ToInt32(Console.ReadLine());
+                Acc[] ar = new Acc[l];
+                for (int i = 0; i < l ; i++) 
+                {
+                    ar[i] = new Acc("","","",0,0,0);
+                    ar[i].Num = Console.ReadLine();
+                    ar[i].Fio = Console.ReadLine();
+                    ar[i].Phone = Console.ReadLine();
+                    ar[i].Dohod = Convert.ToDouble(Console.ReadLine());
+                    ar[i].Rashod = Convert.ToDouble(Console.ReadLine());
+                    ar[i].Uplatit = Convert.ToDouble(Console.ReadLine());
+                }
+                Console.Write("Счета с отрицательным балансом: ");
+                var neg =
+                    from a in ar
+                    where a.Balance(a.Dohod, a.Rashod, a.Uplatit) < 0
+                    select a.Num;
+                Console.Write(neg.Count() + " штук(и) (");
+                foreach (var a in neg) Console.Write(a + " ");
+                Console.WriteLine(")");
+                Console.Write("Клиент с наибольшим балансом: ");
+                var max =
+                    from a in ar
+                    orderby a.Balance(a.Dohod, a.Rashod, a.Uplatit) descending
+                    select a;
+                foreach (var a in max) { Console.WriteLine(a.Num); break; }
+                Console.Write("Средний доход по счетам: ");
+                double mean = 0;
+                int c = 0;
+                foreach (var a in ar) { mean += a.Dohod; c++; }
+                Console.WriteLine(mean / c);
+                Console.Write("Сумма налогов со всех счетов: ");
+                mean = 0;
+                foreach (var a in ar) { mean += a.Uplatit; }
+                Console.WriteLine(mean);
+            }
+            if (ch == 2)
+            {
+                Console.Write("Счета с отрицательным балансом: ");
+                var neg =
+                    from a in archive
+                    where a.Balance(a.Dohod, a.Rashod, a.Uplatit) < 0
+                    select a.Num;
+                Console.Write(neg.Count() + " штук(и) (");
+                foreach (var a in neg) Console.Write(a + " ");
+                Console.WriteLine(")");
+                Console.Write("Клиент с наибольшим балансом: ");
+                var max =
+                    from a in archive
+                    orderby a.Balance(a.Dohod, a.Rashod, a.Uplatit) descending
+                    select a;
+                foreach (var a in max) { Console.WriteLine(a.Num); break; }
+                Console.Write("Средний доход по счетам: ");
+                double mean = 0;
+                int c = 0;
+                foreach (var a in archive) { mean += a.Dohod; c++; }
+                Console.WriteLine(mean/c);
+                Console.Write("Сумма налогов со всех счетов: ");
+                mean = 0;
+                foreach(var a in archive) { mean += a.Uplatit; }
+                Console.WriteLine(mean);
+            }
+        }
+    }
+}
