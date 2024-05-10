@@ -1,0 +1,110 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication42
+{
+    class Program
+    {
+        class Pr
+    {
+            int n = 0;
+            string name = "";
+            string k = "";
+            int[] sk = new int[3];
+            int c = 0;
+            public Pr(int n, string name, string k, int[] sk, int c)
+            {
+                this.n = n;
+                this.name = name;
+                this.k = k;
+                this.sk = sk;
+                this.c = c;
+            }
+            public int Num
+            {
+                get { return n; }
+                set { n = value; }
+            }
+            public string Name
+            {
+                get { return name; }
+                set { name = value; }
+            }
+            public string Kat
+            {
+                get { return k; }
+                set { k = value; }
+            }
+            public int[] Sklad
+            {
+                get { return sk; }
+                set { sk = value; }
+            }
+            public int Cost
+            {
+                get { return c; }
+                set { c = value; }
+            }
+    }
+        static void Main(string[] args)
+        {
+            Pr[] pr = new Pr[8];
+            pr[0] = new Pr(1, "Нож", "Метательное оружие", new int[] { 9, 5, 0 }, 1000);
+            pr[1] = new Pr(2, "Булыжник", "Метательное оружие", new int[] { 1, 1, 1 }, 100);
+            pr[2] = new Pr(3, "Гвоздь", "Стройматериал", new int[] { 500, 200, 300 }, 7);
+            pr[3] = new Pr(4, "Арматура", "Стройматериал", new int[] { 6, 6, 6 }, 500);
+            pr[4] = new Pr(5, "Олег Степанович", "None", new int[] { 1, 0, 0}, 99999999);
+            pr[5] = new Pr(6, "Вода питьевая", "Напитки", new int[] { 10, 15, 30 }, 40);
+            pr[6] = new Pr(7, "Цианид", "Токсичные вещества", new int[] { 2, 2, 3 }, 4000);
+            pr[7] = new Pr(8, "Уран", "Токсичные вещества", new int[] { 600, 800, 550 }, 800000);
+            var vtes1 = (from p in pr
+                       select p.Sklad[0]).Sum();
+            var vtes2 = (from p in pr
+                         select p.Sklad[1]).Sum();
+            var vtes3 = (from p in pr
+                         select p.Sklad[2]).Sum();
+
+            Console.Write("1-й склад: ");
+            Console.WriteLine(vtes1);
+            Console.Write("2-й склад: ");
+            Console.WriteLine(vtes2);
+            Console.Write("3-й склад: ");
+            Console.WriteLine(vtes3);
+            var kate = (from p in pr
+                       select p.Kat).Distinct();
+            var maxk = (from k in kate
+                        from p in pr
+                        where k == p.Kat
+                        select p.Cost).Max();
+
+
+
+
+            Console.ReadKey();
+        }
+    }
+
+    
+}
+
+/*
+
+
+
+        -=Zz*O_o*MBI=-
+             |||
+        ||||||||||||||
+        ||| ||||||| ||
+    }   ||| ||||||| ||
+        ||| ||||||| ||
+        ||| ||||||| ||
+        /// ||||||| \\\
+}           ||  |||
+            ||  |||
+            ||  |||
+            ||  |||
+            {}  {|}
+        */
