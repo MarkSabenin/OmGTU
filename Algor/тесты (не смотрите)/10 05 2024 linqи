@@ -67,7 +67,7 @@ namespace ConsoleApplication42
                          select p.Sklad[1]).Sum();
             var vtes3 = (from p in pr
                          select p.Sklad[2]).Sum();
-
+            Console.WriteLine("Количество товаров: ");
             Console.Write("1-й склад: ");
             Console.WriteLine(vtes1);
             Console.Write("2-й склад: ");
@@ -80,9 +80,26 @@ namespace ConsoleApplication42
                         from p in pr
                         where k == p.Kat
                         select p.Cost).Max();
+            Console.Write("Максимальная цена по каждой категории: ");
+            Console.WriteLine(maxk);
             var meanc = (from p in pr
                          where p.Kat == "None"
                          select p.Cost).Average();
+            Console.Write("Средняя цена за товары без категории: ");
+            Console.WriteLine(meanc);
+            var cheap = (from p in pr
+                         select p.Cost).Min();
+            var cheap_name = from p in pr
+                              where p.Cost == cheap
+                              select p.Name;
+            Console.Write("Самый дешевый товар: ");
+            foreach (var c in cheap_name)
+            Console.WriteLine(c + ", цена: " + cheap);
+            var comc = (from p in pr
+                        select (p.Sklad[0] + p.Sklad[1] + p.Sklad[2]) * p.Cost).Sum();
+            Console.Write("Стоимость товаров со всех складов: ");
+            Console.WriteLine(comc);
+
 
 
 
