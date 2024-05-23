@@ -9,7 +9,7 @@ namespace ConsoleApplication42
     class Program
     {
         class Pr
-    {
+        {
             int n = 0;
             string name = "";
             string k = "";
@@ -48,20 +48,21 @@ namespace ConsoleApplication42
                 get { return c; }
                 set { c = value; }
             }
-    }
+        }
         static void Main(string[] args)
         {
-            Pr[] pr = new Pr[8];
+            Pr[] pr = new Pr[9];
             pr[0] = new Pr(1, "Нож", "Метательное оружие", new int[] { 9, 5, 0 }, 1000);
             pr[1] = new Pr(2, "Булыжник", "Метательное оружие", new int[] { 1, 1, 1 }, 100);
             pr[2] = new Pr(3, "Гвоздь", "Стройматериал", new int[] { 500, 200, 300 }, 7);
             pr[3] = new Pr(4, "Арматура", "Стройматериал", new int[] { 6, 6, 6 }, 500);
-            pr[4] = new Pr(5, "Олег Степанович", "None", new int[] { 1, 0, 0}, 99999999);
+            pr[4] = new Pr(5, "Олег Степанович", "None", new int[] { 1, 0, 0 }, 99999999);
             pr[5] = new Pr(6, "Вода питьевая", "Напитки", new int[] { 10, 15, 30 }, 40);
             pr[6] = new Pr(7, "Цианид", "Токсичные вещества", new int[] { 2, 2, 3 }, 4000);
             pr[7] = new Pr(8, "Уран", "Токсичные вещества", new int[] { 600, 800, 550 }, 800000);
+            pr[8] = new Pr(9, "Скамейка", "None", new int[] { 6, 8, 5 }, 800);
             var vtes1 = (from p in pr
-                       select p.Sklad[0]).Sum();
+                         select p.Sklad[0]).Sum();
             var vtes2 = (from p in pr
                          select p.Sklad[1]).Sum();
             var vtes3 = (from p in pr
@@ -74,11 +75,14 @@ namespace ConsoleApplication42
             Console.Write("3-й склад: ");
             Console.WriteLine(vtes3);
             var kate = (from p in pr
-                       select p.Kat).Distinct();
+                        select p.Kat).Distinct();
             var maxk = (from k in kate
                         from p in pr
                         where k == p.Kat
                         select p.Cost).Max();
+            var meanc = (from p in pr
+                         where p.Kat == "None"
+                         select p.Cost).Average();
 
 
 
@@ -87,7 +91,7 @@ namespace ConsoleApplication42
         }
     }
 
-    
+
 }
 
 /*
