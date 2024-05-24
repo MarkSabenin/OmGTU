@@ -1,0 +1,131 @@
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication42
+{
+    class Program
+    {
+        class Pr
+        {
+            int n = 0;
+            string name = "";
+            string k = "";
+            int[] sk = new int[3];
+            int c = 0;
+            public Pr(int n, string name, string k, int[] sk, int c)
+            {
+                this.n = n;
+                this.name = name;
+                this.k = k;
+                this.sk = sk;
+                this.c = c;
+            }
+            public int Num
+            {
+                get { return n; }
+                set { n = value; }
+            }
+            public string Name
+            {
+                get { return name; }
+                set { name = value; }
+            }
+            public string Kat
+            {
+                get { return k; }
+                set { k = value; }
+            }
+            public int[] Sklad
+            {
+                get { return sk; }
+                set { sk = value; }
+            }
+            public int Cost
+            {
+                get { return c; }
+                set { c = value; }
+            }
+        }
+        static void Main(string[] args)
+        {
+            Pr[] pr = new Pr[9];
+            pr[0] = new Pr(1, "Нож", "Метательное оружие", new int[] { 9, 5, 0 }, 1000);
+            pr[1] = new Pr(2, "Булыжник", "Метательное оружие", new int[] { 1, 1, 1 }, 100);
+            pr[2] = new Pr(3, "Гвоздь", "Стройматериал", new int[] { 500, 200, 300 }, 7);
+            pr[3] = new Pr(4, "Арматура", "Стройматериал", new int[] { 6, 6, 6 }, 500);
+            pr[4] = new Pr(5, "Олег Степанович", "None", new int[] { 1, 0, 0 }, 99999999);
+            pr[5] = new Pr(6, "Вода питьевая", "Напитки", new int[] { 10, 15, 30 }, 40);
+            pr[6] = new Pr(7, "Цианид", "Токсичные вещества", new int[] { 2, 2, 3 }, 4000);
+            pr[7] = new Pr(8, "Уран", "Токсичные вещества", new int[] { 600, 800, 550 }, 800000);
+            pr[8] = new Pr(9, "Скамейка", "None", new int[] { 6, 8, 5 }, 800);
+            var vtes1 = (from p in pr
+                         select p.Sklad[0]).Sum();
+            var vtes2 = (from p in pr
+                         select p.Sklad[1]).Sum();
+            var vtes3 = (from p in pr
+                         select p.Sklad[2]).Sum();
+            Console.WriteLine("Количество товаров: ");
+            Console.Write("1-й склад: ");
+            Console.WriteLine(vtes1);
+            Console.Write("2-й склад: ");
+            Console.WriteLine(vtes2);
+            Console.Write("3-й склад: ");
+            Console.WriteLine(vtes3);
+            var kate = ((from p in pr
+                        select p.Kat).Distinct()).ToList();
+            var maxk = (from kat in kate
+                       select 
+                        (from p in pr
+                        where kat == p.Kat
+                        select p.Cost).Max()).ToList();
+            Console.Write("Максимальная цена по каждой категории: ");
+            for (int i = 0; i < kate.Count(); i++)
+            {
+                Console.WriteLine(kate[i] + ": " + maxk[i]);
+            }
+            var meanc = (from p in pr
+                         where p.Kat == "None"
+                         select p.Cost).Average();
+            Console.Write("Средняя цена за товары без категории: ");
+            Console.WriteLine(meanc);
+            var cheap = (from p in pr
+                         select p.Cost).Min();
+            var cheap_name = from p in pr
+                             where p.Cost == cheap
+                             select p.Name;
+            Console.Write("Самый дешевый товар: ");
+            foreach (var c in cheap_name)
+                Console.WriteLine(c + ", цена: " + cheap);
+            var comc = (from p in pr
+                        select (p.Sklad[0] + p.Sklad[1] + p.Sklad[2]) * p.Cost).Sum();
+            Console.Write("Стоимость товаров со всех складов: ");
+            Console.WriteLine(comc);
+            Console.ReadKey();
+        }
+    }
+
+
+}
+
+/*
+
+
+
+        -=Zz*O_o*MBI=-
+             |||
+        ||||||||||||||
+        ||| ||||||| ||
+    }   ||| ||||||| ||
+        ||| ||||||| ||
+        ||| ||||||| ||
+        /// ||||||| \\\
+}           ||  |||
+            ||  |||
+            ||  |||
+            ||  |||
+            {}  {|}
+        */
