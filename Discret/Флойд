@@ -1,0 +1,59 @@
+            Console.WriteLine("Введите количество вершин");
+            int n = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Вводим матрицу смежности (по диагонали - 0 или i, там где нет дуги - i");
+            string[,] m = new string[n,n];
+            for (int i = 0; i < n; i++)
+                for (int j = 0; j < n; j++)
+                { Console.WriteLine(i + " " + j); m[i, j] = Console.ReadLine(); }
+
+            int[,] m1 = new int[n,n];
+            int[,] m2 = new int[n,n];
+            //для удобства бесконечности назову крупным числом
+            for (int i = 0; i < n; i++)
+                for (int j = 0; j < n; j++)
+                {
+                    if (int.TryParse(m[i, j], out _)) m1[i, j] = Convert.ToInt32(m[i, j]);
+                    else m1[i, j] = 100;
+                }
+            int k = 0;
+
+            while (k<n)
+            {
+                for (int i = 0; i < n; i++)
+                    for (int j = 0; j < n; j++)
+                    {
+                        if (m1[i, k] + m1[k, j] < m1[i, j] && m1[i, k]!=100 && m1[k,j]!=100) m2[i, j] = m1[i, k] + m1[k, j];
+                        else m2[i, j] = m1[i, j];
+                    }
+                k++;
+                for (int i = 0; i < n; i++)
+                    for (int j = 0; j < n; j++) m1[i, j] = m2[i, j];
+            }
+            Console.WriteLine();
+
+            for (int i = 0; i < n; i++)
+                for (int j = 0; j < n; j++)
+                {
+                    string o = Convert.ToString(m1[i, j]);
+                    if (o == "100") o = "*";
+                    if (j != n - 1) Console.Write(o + " ");
+                    else Console.WriteLine(o);
+                }
+/*Пример который я брал
+i
+5
+i
+i
+i
+i
+5
+3
+-3
+i
+i
+i
+2
+i
+-5
+*/
+i
