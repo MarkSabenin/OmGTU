@@ -1,0 +1,56 @@
+        public class Car
+        {
+            public string m;
+            public string n;
+            public string c;
+            public int y;
+            public Car(string model, string num, string color, int year)
+            {
+                this.m = model;
+                this.n = num;
+                this.c = color;
+                this.y = year;
+            }
+            public string AboutCar()
+            {
+                return $"Автомобиль {n} модели {m} {c} {y} года выпуска";
+            }
+        }
+
+        public class Garage
+        {
+            string garage_name = "Гараж Бэтмена (Бэт-пещера)";
+            Car[] c;
+            public Garage(Car[] cars) { this.c = cars; }
+            public string GarageName { get => garage_name; }
+            public Car[] Cars { get => c; }
+        }
+
+        public class WashStation
+        {
+            public void WashCar(Car car)
+            {
+                Console.WriteLine($"{car.AboutCar()} начищен до блеска!");
+            }
+        }
+
+        delegate void DelWash(Car car);
+
+        static void Main()
+        {
+            Car[] c = new Car[7];
+            c[0] = new Car("Toyota", "12345", "красного цвета", 2005);
+            c[1] = new Car("Kia Rio", "1586", "красного цвета", 2000);
+            c[2] = new Car("(маршрутка)", "777dogoni", "черного цвета", 1950);
+            c[3] = new Car("БЕЛАААЗ", "9999bigboy", "желтого цвета", 2010);
+            c[4] = new Car("Бэт-мобиль", "liveinblack247", "черного цвета", 1985);
+            c[5] = new Car("Бэт-вертолет", "liveindark365", "черного цвета", 1986);
+            c[6] = new Car("Черепаха на колесах", "ttl888", "зеленого цвета с красными глазами", 2015);
+            Garage g = new Garage(c);
+            WashStation ws = new WashStation();
+            DelWash dwash = ws.WashCar;
+
+            Console.WriteLine(g.GarageName + " проводит обслуживание:");
+            foreach (Car car in g.Cars)
+                dwash(car);
+         }
