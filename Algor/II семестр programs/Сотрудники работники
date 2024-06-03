@@ -1,0 +1,60 @@
+        class Worker
+        {
+            int n = 0;
+            string fio = "";
+            string ed_sp = "";
+            int zp = 0;
+            int pc = 0;
+            int cpo = 0;
+            public Worker(int num, string fio, string educ_spec, int zp, int prod_count, int costperone)
+            {
+                n = num;
+                this.fio = fio;
+                ed_sp = educ_spec;
+                this.zp = zp;
+                pc = prod_count;
+                cpo = costperone;
+            }
+            public int Num { get { return n; } }
+            public string Fio { get { return fio; } }
+            public string Educ_Spec { get { return ed_sp; } }
+            public int Zp { get { return zp; } }
+            public int ProdCount { get { return pc; } }
+            public int CostPerOne { get { return cpo; } }
+
+            public void WInfo(Worker w)
+            {
+                Console.WriteLine("Сотрудник {0} - {1}, {2}, зарплата - {3} р/м, произвел {4} товаров(а), каждый ценой в {5} р", w.Num, w.Fio, w.Educ_Spec, w.Zp, w.ProdCount, w.CostPerOne);
+            }
+        }
+        static void Main(string[] args)
+        {
+            Worker[] ws = new Worker[6];
+            ws[0] = new Worker(1, "Корнеплод Виктор Геннадьевич", "Высшее образование, агроном", 500000, 500, 500);
+            ws[1] = new Worker(2, "Жужалкин Андрей Викторович", "Лесное образование, пчеловод", 10000, 230, 20);
+            ws[2] = new Worker(3, "Помолчайкин Иван Андреевич", "Высшее образование, программист", 80000, 10, 5000);
+            ws[3] = new Worker(4, "Кривенький Антоша Иванович", "Школьник, музыкант", 1000, 30, 300);
+            ws[4] = new Worker(5, "Брынчалкин Раджеш Антонович", "4 высших образования, индус(знает всё)", 99999999, 1, 99999999);
+            ws[5] = new Worker(6, "Сиплый Богдан Сергеевич", "Низшее образование, градостроитель", 12000, 5, 5000);
+            var zp1 = from w in ws
+                      where w.Zp < w.CostPerOne * w.ProdCount
+                      select w;
+            var cep = (from w in ws
+                       select w.ProdCount).Sum();
+            var cap = (from w in ws
+                       select w.ProdCount * w.CostPerOne).Sum();
+            var zp2 = from w in ws
+                      where w.Zp >= (w.ProdCount * w.CostPerOne) / 2
+                      select w;
+
+            Console.WriteLine("-- Сотрудники, у которых зарплата меньше чем суммарная стоимость вырабатываемой ими продукции:");
+            foreach (var w in zp1) w.WInfo(w);
+            Console.WriteLine();
+            Console.WriteLine("-- Количество единиц продукции по всем работникам: " + cep);
+            Console.WriteLine();
+            Console.WriteLine("-- Суммарная стоимость всей производимой продукции: " + cap);
+            Console.WriteLine();
+            Console.WriteLine("-- Сотрудники, получающие не менее 50% от суммарной стоимости производимого продукта:");
+            foreach (var w in zp2) w.WInfo(w);
+            Console.ReadKey();
+        }
