@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Введите названия городов, в конце введите stop");
+        string end = "";
+        List<string> g = new List<string>();
+        while (true)
+        {
+            end = Console.ReadLine();
+            if (end != "stop") g.Add(end);
+            else break;
+        }
+        string[] ga = g.ToArray();
+        int[] p = new int[ga.Length];
+        for (int i = 0; i < p.Length; i++) p[i] = 0;
+        //  foreach (string i in g) Console.WriteLine(i);
+        while (true)
+        {
+            Stack<string> s = new Stack<string>();
+            
+            string w = ga[0];
+            foreach (string i in ga)
+            {
+
+                int ii = Array.IndexOf(ga, i);
+                if (p[ii] != 0)
+                    w = i;
+            }
+            string ws = w;
+            s.Push(w);
+            Console.WriteLine(w.ToCharArray()[w.Length - 1]);
+            while (w != ws || s.Count == 1)
+            {
+                foreach (string i in ga)
+                {
+                    int ii = Array.IndexOf(ga, i);
+                    if (i != w && p[ii] == 0 && w.ToCharArray()[w.Length - 1] == i.ToCharArray()[0]) { w = i; s.Push(w); Console.WriteLine(ii); break; }
+                }
+            }
+            int sl = s.Count;
+            Console.WriteLine("sl " + sl);
+            p[Array.IndexOf(ga, s.Pop())] = sl;
+
+        }
+
+
+        Console.ReadKey();
+        
+    }
+}
+/*
+kirov
+vladimir
+krasnsk
+samamra
+ramensk
+arzamas
+*/
