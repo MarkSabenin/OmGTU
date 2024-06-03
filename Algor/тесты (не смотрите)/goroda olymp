@@ -30,8 +30,8 @@ class Program
             {
 
                 int ii = Array.IndexOf(ga, i);
-                if (p[ii] != 0)
-                    w = i;
+                if (p[ii] == 0)
+                   { w = i; break; }
             }
             string ws = w;
             s.Push(w);
